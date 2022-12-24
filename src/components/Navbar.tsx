@@ -12,23 +12,23 @@ function Navbar() {
                         Businiss Cards App
                     </NavLink>
                     <ul className="navbar-nav flex-row me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <NavLink 
-                                className="nav-link me-2"
-                                aria-current="page"
-                                to="/card"
-                            >Card
-                            </NavLink>
-                        </li>
-                        <li className="nav-item me-2">
+                        <li className="nav-item me-3">
                             <NavLink 
                                 className="nav-link"
                                 aria-current="page"
                                 to="/about"
                             >About
                             </NavLink>
+                        </li>                        
+                        <li className="nav-item">
+                            <NavLink 
+                                className="nav-link me-3"
+                                aria-current="page"
+                                to="/card"
+                            >Card
+                            </NavLink>
                         </li>
-                        <li className="nav-item me-2">
+                        <li className="nav-item me-3">
                             <NavLink 
                                 className="nav-link"
                                 aria-current="page"
