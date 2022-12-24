@@ -1,7 +1,7 @@
 function FovoritCards() {
     return (  
         <>
-            Fovorit Cards Page Works !!!
+            Favorite Cards Page Works !!!
         </>
     );
 }
