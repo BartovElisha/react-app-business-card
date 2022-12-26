@@ -20,14 +20,6 @@ function Navbar() {
                             >About
                             </NavLink>
                         </li>                        
-                        <li className="nav-item">
-                            <NavLink 
-                                className="nav-link me-3"
-                                aria-current="page"
-                                to="/card"
-                            >Card
-                            </NavLink>
-                        </li>
                         <li className="nav-item me-3">
                             <NavLink 
                                 className="nav-link"
@@ -42,6 +34,40 @@ function Navbar() {
                                 aria-current="page"
                                 to="/favoritecards"
                             >My Favorite Cards
+                            </NavLink>
+                        </li>
+                    </ul>
+                    <ul className="navbar-nav flex-row mb-2 mb-lg-0">
+                        <li className="nav-item me-3">
+                            <NavLink
+                                className="nav-link"
+                                aria-current="page"
+                                to="/signin"
+                            >Signin                                
+                            </NavLink>
+                        </li>
+                        <li className="nav-item me-3">
+                            <NavLink
+                                className="nav-link"
+                                aria-current="page"
+                                to="/signup"
+                            >Signup                                
+                            </NavLink>
+                        </li>
+                        <li className="nav-item me-3">
+                            <NavLink
+                                className="nav-link"
+                                aria-current="page"
+                                to="/businessuserregistration"
+                            >Business                                
+                            </NavLink>
+                        </li>
+                        <li className="nav-item me-3">
+                            <NavLink
+                                className="nav-link"
+                                aria-current="page"
+                                to="/signout"
+                            >Signout                                
                             </NavLink>
                         </li>
                     </ul>
