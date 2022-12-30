@@ -6,7 +6,7 @@ interface Props {
 function Title({ main, sub}: Props
     ) {
     return (  
-        <h2 className="text-center my-3">
+        <h2 className="text-center m-3">
             {main}
             <br />
             <small className="text-muted">
