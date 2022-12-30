@@ -1,8 +1,11 @@
+import Title from "../../components/Title";
+
 function BusinessCardRegistration() {
     return (  
-        <>
-            Business Card Registration Page Works !!!
-        </>
+        <Title 
+            main="Business Registration Form"
+            sub="Open business card"
+        />
     );
 }
 

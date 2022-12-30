@@ -1,8 +1,11 @@
+import Title from "../../components/Title";
+
 function About() {
     return (  
-        <>
-            About Page Works !!!
-        </>
+        <Title
+            main="About Us"
+            sub="Here you will find an explanation of how to interface with the application." 
+        />        
     );
 }
 

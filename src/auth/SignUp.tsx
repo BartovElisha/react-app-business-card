@@ -1,8 +1,11 @@
+import Title from "../components/Title";
+
 function SignUp() {
     return (  
-        <>
-            SignUp Works 
-        </>
+        <Title 
+            main="Signup for Real App"
+            sub="You can open new account for free."
+        />
     );
 }
 

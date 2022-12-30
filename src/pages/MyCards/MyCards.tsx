@@ -1,8 +1,11 @@
+import Title from "../../components/Title";
+
 function MyCards() {
     return ( 
-        <>
-            My Cards Page Works !!!
-        </> 
+        <Title 
+            main="Your Cards List"
+            sub="Here you can view your cards list"
+        /> 
     );
 }
 

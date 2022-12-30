@@ -1,8 +1,11 @@
+import Title from "../../components/Title";
+
 function Home() {
     return (  
-        <>
-            Home Page Works !!!
-        </>
+        <Title 
+            main="Business Card App"
+            sub="Here you will find business cards."
+        />
     );
 }
 

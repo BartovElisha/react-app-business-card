@@ -1,8 +1,11 @@
+import Title from "../components/Title";
+
 function BusinessUserRegistration() {
     return (  
-        <>
-            Business Registration Works
-        </>
+        <Title 
+            main="Business Registration Form"
+            sub="Open business account for free !"
+        />
     );
 }
 

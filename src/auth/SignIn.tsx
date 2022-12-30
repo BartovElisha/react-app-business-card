@@ -1,8 +1,11 @@
+import Title from "../components/Title";
+
 function SignIn() {
     return (  
-        <>
-            SignIn Works
-        </>
+        <Title 
+            main="Signin to Real App"
+            sub="You can signin here with your account !"
+        />
     );
 }
 
