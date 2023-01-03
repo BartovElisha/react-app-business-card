@@ -6,6 +6,7 @@ interface ISignupData {
     lastName: string;
     email: string;
     password: string;
+    isAdmin: boolean;
 }
 
 function SignUp() {
@@ -14,6 +15,7 @@ function SignUp() {
     const [lastName,setLastName] = useState('');
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
+    const [isAdmin,setIsAdmin] = useState(false);
 
     function submit() {
 
