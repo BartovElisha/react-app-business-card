@@ -1,4 +1,6 @@
+import Joi from "joi";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Title from "../../components/Title";
 
 interface IBusinessCardData {
@@ -11,14 +13,44 @@ interface IBusinessCardData {
 
 function BusinessCardRegistration() {
     // States
-    const [businessName,setBusinessName] = useState('');
-    const [businessDescription,setBusinessDescription] = useState('');
-    const [businessAddress,setBusinessAddress] = useState('');
-    const [businessPhone,setBusinessPhone] = useState('');
-    // const [businessImage,setBusinessImage] = useState('');
+    const navigate = useNavigate();
+    const [businessName, setBusinessName] = useState<string>('');
+    const [businessDescription, setBusinessDescription] = useState<string>('');
+    const [businessAddress, setBusinessAddress] = useState<string>('');
+    const [businessPhone, setBusinessPhone] = useState<string>('');
+    const [error, setError] = useState<string>('');
 
     function submit() {
+        const schema = Joi.object().keys({
+            businessName: Joi.string().required().min(2).max(255),
+            businessDescription: Joi.string().required().min(2).max(255),
+            businessAddress: Joi.string().required().min(2).max(255),
+            businessPhone: Joi.string().required().min(10).max(13).pattern(/^[+,0-9]+$/),
+            // businessPhone: Joi.string().required().length(13).pattern(/^[+,0-9]+$/),
+        });
 
+        const { error, value } = schema.validate({
+            businessName,
+            businessDescription,
+            businessAddress,
+            businessPhone
+        });
+
+        if (error) {
+            setError(error.message);
+            return;
+        }
+
+        setError('');
+        createCard(value); 
+    }
+
+    function createCard(data: IBusinessCardData) {
+        // 1. Send data to the server Rest API...
+        console.log(data);
+        
+        // 2. If All OK Navigate to Home page
+        navigate('/');
     }
 
     return (  
@@ -65,9 +97,9 @@ function BusinessCardRegistration() {
                 <div className="mp-3">
                     <label className="mb-2 fs-5">Business Phone:</label>
                     <input
-                        type="text"
+                        type="phone"
                         className="form-control text-muted mb-3"
-                        placeholder="Business Phone"
+                        placeholder="Example Phone: +972500000000"
                         value={businessPhone}
                         onChange={(e) => setBusinessPhone(e.target.value)}
                     >
@@ -80,6 +112,12 @@ function BusinessCardRegistration() {
                     >Create Card
                     </button>
                 </div>
+                {
+                    error && 
+                    <div className="text-danger">
+                        {error}
+                    </div>
+                }
                 <hr/>
             </div>
         </>
