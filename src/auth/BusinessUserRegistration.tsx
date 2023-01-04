@@ -1,4 +1,6 @@
+import Joi from "joi";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Title from "../components/Title";
 
 
@@ -12,14 +14,42 @@ interface IBusinessUserData {
 
 function BusinessUserRegistration() {
     // States
-    const [firstName,setFirstName] = useState('');
-    const [lastName,setLastName] = useState('');
-    const [email,setEmail] = useState('');
-    const [password,setPassword] = useState('');
-    const [biz,setIsAdmin] = useState(false);
+    const navigate = useNavigate();
+    const [firstName, setFirstName] = useState<string>('');
+    const [lastName, setLastName] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [error, setError] = useState<string>('');
 
     function submit() {
+        const schema = Joi.object().keys({
+            firstName: Joi.string().required().min(2).max(255),
+            lastName: Joi.string().required().min(2).max(255),
+            email: Joi.string().required().min(6).max(255).email({ tlds: { allow: false}}),
+            password: Joi.string().required().min(6).max(30)
+        });
 
+        const { error, value } = schema.validate({
+            firstName,
+            lastName,
+            email,
+            password
+        });
+
+        if (error) {
+            setError(error.message);
+            return;
+        }
+
+        setError('');
+        register(value);  
+    }
+
+    function register(data: IBusinessUserData) {
+        // 1. Send data to the server Rest API...
+        console.log(data);
+        // 2. If All OK Navigate to Signin
+        navigate('/businesscardregistration');
     }
 
     return ( 
@@ -81,6 +111,12 @@ function BusinessUserRegistration() {
                     >Next
                     </button>
                 </div>
+                {
+                    error &&
+                    <div className="text-danger">
+                        {error}
+                    </div>
+                }                    
                 <hr/>
             </div>
         </>

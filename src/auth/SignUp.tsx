@@ -1,7 +1,6 @@
 import Joi from "joi";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { isRegularExpressionLiteral } from "typescript";
 import Title from "../components/Title";
 
 interface ISignupData {
@@ -15,10 +14,10 @@ interface ISignupData {
 function SignUp() {
     // States
     const navigate = useNavigate();
-    const [firstName,setFirstName] = useState('');
-    const [lastName,setLastName] = useState('');
-    const [email,setEmail] = useState('');
-    const [password,setPassword] = useState('');
+    const [firstName, setFirstName] = useState<string>('');
+    const [lastName, setLastName] = useState<string>('');
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
     const [error, setError] = useState<string>('');
 
     function submit() {
