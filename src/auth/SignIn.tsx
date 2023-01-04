@@ -1,3 +1,4 @@
+import Joi from "joi";
 import { useState } from "react";
 import Title from "../components/Title";
 
@@ -8,11 +9,32 @@ interface ISigninData {
 
 function SignIn() {
     // States
-    const [email,setEmail] = useState('');
-    const [password,setPassword] = useState('');
+    const [email, setEmail] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [error, setError] = useState<string>('');
 
     function login() {
+        const schema = Joi.object().keys({
+            email: Joi.string().required().min(6).max(255).email({ tlds: { allow: false}}),
+            password: Joi.string().required().min(6).max(30)
+        });
 
+        const { error, value } = schema.validate({
+            email,
+            password
+        });
+
+        if (error) {
+            setError(error.message);
+            return;
+        }
+
+        setError('');
+        handler(value);         
+    }
+
+    function handler(value: ISigninData) {
+        console.log(value);
     }
 
     return (  
@@ -52,6 +74,12 @@ function SignIn() {
                     >Login
                     </button>
                 </div>
+                {
+                    error && 
+                    <div className="text-danger">
+                        {error}
+                    </div>
+                }
                 <hr/>
             </div>
         </>
