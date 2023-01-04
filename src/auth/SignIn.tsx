@@ -2,12 +2,11 @@ import Joi from "joi";
 import { useState } from "react";
 import Title from "../components/Title";
 
-interface ISigninData {
-    email: string;
-    password: string;
+interface Props {
+    handler: Function;
 }
 
-function SignIn() {
+function SignIn({ handler }: Props) {
     // States
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -31,10 +30,6 @@ function SignIn() {
 
         setError('');
         handler(value);         
-    }
-
-    function handler(value: ISigninData) {
-        console.log(value);
     }
 
     return (  

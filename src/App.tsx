@@ -83,7 +83,7 @@ function App() {
             />
             <Route
                 path="/signin"
-                element={<SignIn />} 
+                element={<SignIn handler={signIn} />} 
             />
             <Route
                 path="/mycards"
