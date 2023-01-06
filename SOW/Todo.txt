@@ -1,5 +1,7 @@
 ------- Todo List --------
-
+1. Add All Pages -> Done
+2. Add Routes -> Done
+3. Add Server -> Done
 
 
 ------- Questions --------
