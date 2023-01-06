@@ -6,7 +6,6 @@ import { postRequest } from "../services/apiService";
 
 interface ISignupData {
     name: string;
-    // lastName: string;
     email: string;
     password: string;
     izBiz: boolean;
