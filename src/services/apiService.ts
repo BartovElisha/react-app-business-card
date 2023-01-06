@@ -1,6 +1,6 @@
 import { getToken, verifyToken } from "../auth/tokenMenagment";
 
-const serverUrl = 'http://lockalhost:3000/';
+const serverUrl = 'http://localhost:3000/';
 
 const handleRequest = (
     url: string,

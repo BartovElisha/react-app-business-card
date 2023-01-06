@@ -2,37 +2,37 @@ import Joi from "joi";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Title from "../components/Title";
+import { postRequest } from "../services/apiService";
 
 interface ISignupData {
-    firstName: string;
-    lastName: string;
+    name: string;
+    // lastName: string;
     email: string;
     password: string;
-    isAdmin: boolean;
+    izBiz: boolean;
 }
 
 function SignUp() {
     // States
     const navigate = useNavigate();
-    const [firstName, setFirstName] = useState<string>('');
-    const [lastName, setLastName] = useState<string>('');
+    const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [error, setError] = useState<string>('');
 
     function submit() {
         const schema = Joi.object().keys({
-            firstName: Joi.string().required().min(2).max(255),
-            lastName: Joi.string().required().min(2).max(255),
+            name: Joi.string().required().min(2).max(255),
             email: Joi.string().required().min(6).max(255).email({ tlds: { allow: false}}),
-            password: Joi.string().required().min(6).max(30)
+            password: Joi.string().required().min(6).max(30),
+            isBiz: Joi.boolean().required()
         });
 
         const { error, value } = schema.validate({
-            firstName,
-            lastName,
+            name,
             email,
-            password
+            password,
+            isBiz: false
         });
 
         if (error) {
@@ -45,10 +45,24 @@ function SignUp() {
     }
 
     function register(data: ISignupData) {
-        // 1. Send data to the server Rest API...
-        console.log(data);
-        // 2. If All OK Navigate to Signin
-        navigate('/signin');
+        const res = postRequest(
+            'users/signup',
+            data,
+            false
+        );
+        
+        if (!res) {
+            return;
+        } 
+            
+        res
+        .then(response => response.json())
+        .then(json => {
+            if (json.error) {
+                return;
+            }
+            navigate('/signin');
+        });
     }
 
     return (  
@@ -65,19 +79,8 @@ function SignUp() {
                         type="text"
                         className="form-control text-muted mb-3"
                         placeholder="First Name"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                    >
-                    </input>
-                </div>
-                <div className="mp-3">
-                    <label className="mb-2 fs-5">Last Name:</label>
-                    <input
-                        type="text"
-                        className="form-control text-muted mb-3"
-                        placeholder="Last Name"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                     >
                     </input>
                 </div>
