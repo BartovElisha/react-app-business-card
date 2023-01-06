@@ -54,47 +54,49 @@ function App() {
         signIn,
         isAdmin
     }}>
-        <Navbar />
-        <ToastContainer />
-        <Routes>
-            <Route 
-                path="/"
-                element={<Home />}  
-            />
-            <Route
-                path="/card"
-                element={<Card />} 
-            />
-            <Route
-                path="/about"
-                element={<About />} 
-            />
-            <Route 
-                path="/signup"
-                element={<SignUp />}
-            />
-            <Route 
-                path="/businessuserregistration"
-                element={<BusinessUserRegistration />}
-            />
-            <Route
-                path="/businesscardregistration"
-                element={<BusinessCardRegistration />} 
-            />
-            <Route
-                path="/signin"
-                element={<SignIn handler={signIn} />} 
-            />
-            <Route
-                path="/mycards"
-                element={<MyCards />} 
-            />                      
-            <Route
-                path="/favoritecards"
-                element={<FavoriteCards />} 
-            />                      
-        </Routes>
-        <Footer />
+        <div className="d-flex h-100 flex-column justify-content-between">
+            <Navbar />
+            <ToastContainer />
+            <Routes>
+                <Route 
+                    path="/"
+                    element={<Home />}  
+                />
+                <Route
+                    path="/card"
+                    element={<Card />} 
+                />
+                <Route
+                    path="/about"
+                    element={<About />} 
+                />
+                <Route 
+                    path="/signup"
+                    element={<SignUp />}
+                />
+                <Route 
+                    path="/businessuserregistration"
+                    element={<BusinessUserRegistration />}
+                />
+                <Route
+                    path="/businesscardregistration"
+                    element={<BusinessCardRegistration />} 
+                />
+                <Route
+                    path="/signin"
+                    element={<SignIn handler={signIn} />} 
+                />
+                <Route
+                    path="/mycards"
+                    element={<MyCards />} 
+                />                      
+                <Route
+                    path="/favoritecards"
+                    element={<FavoriteCards />} 
+                />                      
+            </Routes>
+            <Footer />
+        </div>
     </AppContext.Provider>
   );
 }
