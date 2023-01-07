@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import './App.css';
 import BusinessUserRegistration from './auth/BusinessUserRegistration';
 import SignIn from './auth/SignIn';
@@ -59,9 +59,29 @@ function App() {
         res
         .then(response => response.json())
         .then(json => {
-            if (json.error)
+            if (json.error) {
+                toast.error(json.error, {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });                
                 return;
-
+            }
+            toast.success(`User ${json.name} succsessifully Loged In`,{
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+                progress: undefined,
+                theme: "colored",
+            });             
             setToken(json.token);
             localStorage.setItem('admin',json.isAdmin);
             setIsAdmin(json.isAdmin);
