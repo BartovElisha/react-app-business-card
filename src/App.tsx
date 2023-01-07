@@ -41,6 +41,16 @@ function App() {
         // 1. Clear Local Storage
         localStorage.clear();
         // 2. Clear userName and isAdmin  
+        toast.info(`User ${userName} is Signed Out !!!`, {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+        });        
         setUserName('');
         setIsAdmin(false); 
         navigate('/signin')
