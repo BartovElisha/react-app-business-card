@@ -67,6 +67,11 @@ function Navbar() {
                                     >Signup                                
                                     </NavLink>
                                 </li>
+                            </>
+                        }
+                        {
+                            isSignedIn &&
+                            <>
                                 <li className="nav-item me-3">
                                     <NavLink
                                         className="nav-link"
@@ -75,13 +80,10 @@ function Navbar() {
                                     >Business                                
                                     </NavLink>
                                 </li>
+                                <li className="nav-item me-3">
+                                    <SignOut />
+                                </li>
                             </>
-                        }
-                        {
-                            isSignedIn &&
-                            <li className="nav-item me-3">
-                                <SignOut />
-                            </li>
                         }
                     </ul>
                 </div>                

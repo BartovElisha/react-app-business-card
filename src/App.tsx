@@ -118,11 +118,7 @@ function App() {
                     />
                     <Route
                         path="/card"
-                        element={
-                            <RouteGuard>
-                                <Card />
-                            </RouteGuard>                            
-                        } 
+                        element={<Card />} 
                     />
                     <Route
                         path="/about"
@@ -134,11 +130,19 @@ function App() {
                     />
                     <Route 
                         path="/businessuserregistration"
-                        element={<BusinessUserRegistration />}
+                        element={
+                            <RouteGuard>
+                                <BusinessUserRegistration />
+                            </RouteGuard>
+                        }
                     />
                     <Route
                         path="/businesscardregistration"
-                        element={<BusinessCardRegistration />} 
+                        element={
+                            <RouteGuard>
+                                <BusinessCardRegistration />
+                            </RouteGuard>
+                        } 
                     />
                     <Route
                         path="/signin"
