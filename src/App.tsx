@@ -3,6 +3,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import './App.css';
 import BusinessUserRegistration from './auth/BusinessUserRegistration';
+import RouteGuard from './auth/RouteGuard';
 import SignIn from './auth/SignIn';
 import SignUp from './auth/SignUp';
 import { setToken } from './auth/tokenMenagment';
@@ -96,7 +97,7 @@ function App() {
             localStorage.setItem('admin',json.isAdmin);
             setIsAdmin(json.isAdmin);
             setUserName(json.name);
-            navigate('/card');
+            navigate('/mycards');
         });
     }
 
@@ -117,7 +118,11 @@ function App() {
                     />
                     <Route
                         path="/card"
-                        element={<Card />} 
+                        element={
+                            <RouteGuard>
+                                <Card />
+                            </RouteGuard>                            
+                        } 
                     />
                     <Route
                         path="/about"
@@ -141,11 +146,19 @@ function App() {
                     />
                     <Route
                         path="/mycards"
-                        element={<MyCards />} 
+                        element={
+                            <RouteGuard>
+                                <MyCards />        
+                            </RouteGuard>                            
+                        } 
                     />                      
                     <Route
                         path="/favoritecards"
-                        element={<FavoriteCards />} 
+                        element={
+                            <RouteGuard>
+                                <FavoriteCards />
+                            </RouteGuard>                            
+                        } 
                     />                      
                 </Routes>
                 <Footer />
