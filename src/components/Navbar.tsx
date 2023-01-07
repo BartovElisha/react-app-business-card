@@ -1,6 +1,12 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AppContext } from "../App";
+import SignOut from "../auth/SignOut";
 
 function Navbar() {
+    const context = useContext(AppContext);
+    const isSignedIn = context && context.userName.length > 0;
+
     return (  
         <header>
             <nav className="navbar navbar-dark bg-dark">
@@ -38,38 +44,41 @@ function Navbar() {
                         </li>
                     </ul>
                     <ul className="navbar-nav flex-row mb-2 mb-lg-0">
-                        <li className="nav-item me-3">
-                            <NavLink
-                                className="nav-link"
-                                aria-current="page"
-                                to="/signin"
-                            >Signin                                
-                            </NavLink>
-                        </li>
-                        <li className="nav-item me-3">
-                            <NavLink
-                                className="nav-link"
-                                aria-current="page"
-                                to="/signup"
-                            >Signup                                
-                            </NavLink>
-                        </li>
-                        <li className="nav-item me-3">
-                            <NavLink
-                                className="nav-link"
-                                aria-current="page"
-                                to="/businessuserregistration"
-                            >Business                                
-                            </NavLink>
-                        </li>
-                        <li className="nav-item me-3">
-                            <NavLink
-                                className="nav-link"
-                                aria-current="page"
-                                to="/signout"
-                            >Signout                                
-                            </NavLink>
-                        </li>
+                        {
+                            !isSignedIn &&
+                            <>
+                                <li className="nav-item me-3">
+                                    <NavLink
+                                        className="nav-link"
+                                        aria-current="page"
+                                        to="/signin"
+                                    >Signin                                
+                                    </NavLink>
+                                </li>
+                                <li className="nav-item me-3">
+                                    <NavLink
+                                        className="nav-link"
+                                        aria-current="page"
+                                        to="/signup"
+                                    >Signup                                
+                                    </NavLink>
+                                </li>
+                                <li className="nav-item me-3">
+                                    <NavLink
+                                        className="nav-link"
+                                        aria-current="page"
+                                        to="/businessuserregistration"
+                                    >Business                                
+                                    </NavLink>
+                                </li>
+                            </>
+                        }
+                        {
+                            isSignedIn &&
+                            <li className="nav-item me-3">
+                                <SignOut />
+                            </li>
+                        }
                     </ul>
                 </div>                
             </nav>
