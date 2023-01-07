@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AppContext } from "../App";
 import SignOut from "../auth/SignOut";
+import User from "./User";
 
 function Navbar() {
     const context = useContext(AppContext);
@@ -42,6 +43,9 @@ function Navbar() {
                             >My Favorite Cards
                             </NavLink>
                         </li>
+                        <span className="btn text-light">
+                            <User />
+                        </span>                        
                     </ul>
                     <ul className="navbar-nav flex-row mb-2 mb-lg-0">
                         {
