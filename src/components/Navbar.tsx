@@ -67,6 +67,14 @@ function Navbar() {
                                     >Signup                                
                                     </NavLink>
                                 </li>
+                                <li className="nav-item me-3">
+                                    <NavLink
+                                        className="nav-link"
+                                        aria-current="page"
+                                        to="/businessuserregistration"
+                                    >Business User                               
+                                    </NavLink>
+                                </li>
                             </>
                         }
                         {
@@ -76,10 +84,10 @@ function Navbar() {
                                     <NavLink
                                         className="nav-link"
                                         aria-current="page"
-                                        to="/businessuserregistration"
-                                    >Business                                
+                                        to="/businesscardregistration"
+                                    >Business Card                                
                                     </NavLink>
-                                </li>
+                                </li>                            
                                 <li className="nav-item me-3">
                                     <SignOut />
                                 </li>

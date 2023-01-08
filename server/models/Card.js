@@ -28,8 +28,8 @@ const cardSchema = new mongoose.Schema({
     phone: {
         type: String,
         required: true,
-        minlength: 9,
-        maxlength: 14,
+        minlength: 10,
+        maxlength: 17,
     },
     image: {
         url: {

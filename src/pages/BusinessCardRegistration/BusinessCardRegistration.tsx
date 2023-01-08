@@ -1,39 +1,51 @@
 import Joi from "joi";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { AppContext } from "../../App";
 import Title from "../../components/Title";
+import { postRequest } from "../../services/apiService";
 
 interface IBusinessCardData {
-    businessName: string;
-    businessDescription: string;
-    businessAddress: string;
-    businessPhone: string;
-    businessImage: string;
+    title: string;
+    subTitle: string;
+    description: string;
+    address: string;
+    phone: string;
+    image: {
+        url: string;
+        alt: string;
+    };
 }
 
 function BusinessCardRegistration() {
+    const context = useContext(AppContext);
+          
     // States
     const navigate = useNavigate();
-    const [businessName, setBusinessName] = useState<string>('');
-    const [businessDescription, setBusinessDescription] = useState<string>('');
-    const [businessAddress, setBusinessAddress] = useState<string>('');
-    const [businessPhone, setBusinessPhone] = useState<string>('');
+    const [title, setTitle] = useState<string>('');
+    const [subTitle, setSubTitle] = useState<string>('');
+    const [description, setDescription] = useState<string>('');
+    const [address, setAddress] = useState<string>('');
+    const [phone, setPhone] = useState<string>('');
+    const [image, setImage] = useState<string>('');
     const [error, setError] = useState<string>('');
 
     function submit() {
         const schema = Joi.object().keys({
-            businessName: Joi.string().required().min(2).max(255),
-            businessDescription: Joi.string().required().min(2).max(255),
-            businessAddress: Joi.string().required().min(2).max(255),
-            businessPhone: Joi.string().required().min(10).max(13).pattern(/^[+,0-9]+$/),
-            // businessPhone: Joi.string().required().length(13).pattern(/^[+,0-9]+$/),
+            title: Joi.string().required().min(2).max(255),
+            subTitle: Joi.string().required().min(2).max(255),
+            description: Joi.string().required().min(2).max(1024),
+            address: Joi.string().required().min(2).max(255),
+            phone: Joi.string().min(9).max(17).required(),
         });
 
         const { error, value } = schema.validate({
-            businessName,
-            businessDescription,
-            businessAddress,
-            businessPhone
+            title,
+            subTitle,
+            description,
+            address,
+            phone
         });
 
         if (error) {
@@ -46,42 +58,85 @@ function BusinessCardRegistration() {
     }
 
     function createCard(data: IBusinessCardData) {
-        // 1. Send data to the server Rest API...
-        console.log(data);
+        const res = postRequest(
+            'cards',
+            data,
+            false
+        );
         
-        // 2. If All OK Navigate to Home page
-        navigate('/');
+        if (!res) {
+            return;
+        } 
+
+        res
+        .then(response => response.json())
+        .then(json => {
+            if (json.error) {
+                toast.error(json.error, {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });                   
+                return;
+            }
+            toast.success(`New Card ${json.title} Added succsessifully`,{
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+                progress: undefined,
+                theme: "colored",
+            });              
+            navigate('/card');
+        });
     }
 
     return (  
         <>
             <Title 
-                main="Business Registration Form"
+                main="Business Card Registration Form"
                 sub="Open business card"
             />
             <div className="p-3 form-max-w w-50 m-auto">
                 <hr/>
                 <div className="mp-3">
-                    <label className="mb-2 fs-5">Business Name:</label>
+                    <label className="mb-2 fs-5">Business Title:</label>
                     <input
                         type="text"
                         className="form-control text-muted mb-3"
-                        placeholder="Business Name"
-                        value={businessName}
-                        onChange={(e) => setBusinessName(e.target.value)}
+                        placeholder="Business Title"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                    >
+                    </input>
+                </div>
+                <div className="mp-3">
+                    <label className="mb-2 fs-5">Business Sub Title:</label>
+                    <input
+                        type="text"
+                        className="form-control text-muted mb-3"
+                        placeholder="Business Sub Title"
+                        value={subTitle}
+                        onChange={(e) => setSubTitle(e.target.value)}
                     >
                     </input>
                 </div>
                 <div className="mp-3">
                     <label className="mb-2 fs-5">Business Description:</label>
-                    <input
-                        type="text"
+                    <textarea
                         className="form-control text-muted mb-3"
                         placeholder="Business Description"
-                        value={businessDescription}
-                        onChange={(e) => setBusinessDescription(e.target.value)}
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
                     >
-                    </input>
+                    </textarea>
                 </div>
                 <div className="mp-3">
                     <label className="mb-2 fs-5">Business Address:</label>
@@ -89,19 +144,30 @@ function BusinessCardRegistration() {
                         type="text"
                         className="form-control text-muted mb-3"
                         placeholder="Business Address"
-                        value={businessAddress}
-                        onChange={(e) => setBusinessAddress(e.target.value)}
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
                     >
                     </input>
                 </div>
                 <div className="mp-3">
                     <label className="mb-2 fs-5">Business Phone:</label>
                     <input
-                        type="phone"
+                        type="tel"
                         className="form-control text-muted mb-3"
                         placeholder="Example Phone: +972500000000"
-                        value={businessPhone}
-                        onChange={(e) => setBusinessPhone(e.target.value)}
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                    >
+                    </input>
+                </div>
+                <div className="mp-3">
+                    <label className="mb-2 fs-5">Business Image:</label>
+                    <input
+                        type="url"
+                        className="form-control text-muted mb-3"
+                        placeholder="Business Image url"
+                        value={image}
+                        onChange={(e) => setImage(e.target.value)}
                     >
                     </input>
                 </div>

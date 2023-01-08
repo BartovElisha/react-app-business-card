@@ -130,11 +130,7 @@ function App() {
                     />
                     <Route 
                         path="/businessuserregistration"
-                        element={
-                            <RouteGuard>
-                                <BusinessUserRegistration />
-                            </RouteGuard>
-                        }
+                        element={<BusinessUserRegistration />}
                     />
                     <Route
                         path="/businesscardregistration"

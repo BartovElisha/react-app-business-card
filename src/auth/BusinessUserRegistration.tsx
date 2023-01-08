@@ -88,7 +88,7 @@ function BusinessUserRegistration() {
     return ( 
         <>
             <Title 
-                main="Business Registration Form"
+                main="Business User Registration Form"
                 sub="Open business account for free !"
             />
             <div className="p-3 form-max-w w-50 m-auto">
