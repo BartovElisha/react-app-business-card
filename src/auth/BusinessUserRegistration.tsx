@@ -37,7 +37,7 @@ function BusinessUserRegistration() {
                     const key = item.context.key + '';
                     result[key] = item.message;
                 }
-            })
+            });
 
             setError(result);
             return;

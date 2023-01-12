@@ -57,7 +57,7 @@ function BusinessCardRegistration() {
                     const key = item.context.key + '';
                     result[key] = item.message;
                 }
-            })
+            });
 
             setError(result);
             return;

@@ -32,7 +32,7 @@ function SignIn({ handler }: Props) {
                     const key = item.context.key + '';
                     result[key] = item.message;
                 }
-            })
+            });
 
             setError(result);
             return;
