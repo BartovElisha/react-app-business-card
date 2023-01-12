@@ -1,6 +1,7 @@
 import Joi from "joi";
 import { useState } from "react";
 import Title from "../components/Title";
+import { IError } from "../types/types";
 
 interface Props {
     handler: Function;
@@ -10,7 +11,7 @@ function SignIn({ handler }: Props) {
     // States
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const [error, setError] = useState<string>('');
+    const [error, setError] = useState<IError>({});
 
     function login() {
         const schema = Joi.object().keys({
@@ -21,14 +22,23 @@ function SignIn({ handler }: Props) {
         const { error, value } = schema.validate({
             email,
             password
-        });
+        },{abortEarly: false});
 
         if (error) {
-            setError(error.message);
+            const result : IError = {};
+
+            error.details.forEach((item) => {
+            if (item.context) {
+                    const key = item.context.key + '';
+                    result[key] = item.message;
+                }
+            })
+
+            setError(result);
             return;
         }
 
-        setError('');
+        setError({});
         handler(value);         
     }
 
@@ -51,6 +61,12 @@ function SignIn({ handler }: Props) {
                     >
                     </input>
                 </div>
+                {
+                    error && error.email && 
+                    <div className="text-danger">
+                        {error.email}
+                    </div>
+                }                
                 <div className="mp-3">
                     <label className="mb-2 fs-5">Password:</label>
                     <input
@@ -62,6 +78,12 @@ function SignIn({ handler }: Props) {
                     >
                     </input>
                 </div>
+                {
+                    error && error.password && 
+                    <div className="text-danger">
+                        {error.password}
+                    </div>
+                }                    
                 <div>
                     <button
                         onClick={login}
@@ -69,12 +91,6 @@ function SignIn({ handler }: Props) {
                     >Login
                     </button>
                 </div>
-                {
-                    error && 
-                    <div className="text-danger">
-                        {error}
-                    </div>
-                }
                 <hr/>
             </div>
         </>
