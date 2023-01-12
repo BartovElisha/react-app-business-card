@@ -4,14 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Title from "../components/Title";
 import { postRequest } from "../services/apiService";
-import { IError } from "../types/types";
-
-interface ISignupData {
-    name: string;
-    email: string;
-    password: string;
-    izBiz: boolean;
-}
+import { IError, IUserData } from "../types/types";
 
 function SignUp() {
     // States
@@ -54,7 +47,7 @@ function SignUp() {
         register(value);        
     }
 
-    function register(data: ISignupData) {
+    function register(data: IUserData) {
         const res = postRequest(
             'users/signup',
             data,
