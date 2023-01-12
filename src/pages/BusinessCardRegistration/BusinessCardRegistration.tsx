@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { AppContext } from "../../App";
 import Title from "../../components/Title";
 import { postRequest } from "../../services/apiService";
+import { IError } from "../../types/types";
 
 interface IBusinessCardData {
     title: string;
@@ -29,7 +30,7 @@ function BusinessCardRegistration() {
     const [address, setAddress] = useState<string>('');
     const [phone, setPhone] = useState<string>('');
     const [image, setImage] = useState<string>('');
-    const [error, setError] = useState<string>('');
+    const [error, setError] = useState<IError>({});
 
     function submit() {
         const schema = Joi.object().keys({
@@ -46,14 +47,23 @@ function BusinessCardRegistration() {
             description,
             address,
             phone
-        });
+        },{abortEarly: false});
 
         if (error) {
-            setError(error.message);
+            const result : IError = {};
+
+            error.details.forEach((item) => {
+            if (item.context) {
+                    const key = item.context.key + '';
+                    result[key] = item.message;
+                }
+            })
+
+            setError(result);
             return;
         }
 
-        setError('');
+        setError({});
         createCard(value); 
     }
 
@@ -117,6 +127,12 @@ function BusinessCardRegistration() {
                     >
                     </input>
                 </div>
+                {
+                    error && error.title && 
+                    <div className="text-danger">
+                        {error.title}
+                    </div>
+                }                
                 <div className="mp-3">
                     <label className="mb-2 fs-5">Business Sub Title:</label>
                     <input
@@ -128,6 +144,12 @@ function BusinessCardRegistration() {
                     >
                     </input>
                 </div>
+                {
+                    error && error.subTitle && 
+                    <div className="text-danger">
+                        {error.subTitle}
+                    </div>
+                }                   
                 <div className="mp-3">
                     <label className="mb-2 fs-5">Business Description:</label>
                     <textarea
@@ -138,6 +160,12 @@ function BusinessCardRegistration() {
                     >
                     </textarea>
                 </div>
+                {
+                    error && error.description && 
+                    <div className="text-danger">
+                        {error.description}
+                    </div>
+                }                    
                 <div className="mp-3">
                     <label className="mb-2 fs-5">Business Address:</label>
                     <input
@@ -149,6 +177,12 @@ function BusinessCardRegistration() {
                     >
                     </input>
                 </div>
+                {
+                    error && error.address && 
+                    <div className="text-danger">
+                        {error.address}
+                    </div>
+                }                     
                 <div className="mp-3">
                     <label className="mb-2 fs-5">Business Phone:</label>
                     <input
@@ -160,6 +194,12 @@ function BusinessCardRegistration() {
                     >
                     </input>
                 </div>
+                {
+                    error && error.phone && 
+                    <div className="text-danger">
+                        {error.phone}
+                    </div>
+                }                   
                 <div className="mp-3">
                     <label className="mb-2 fs-5">Business Image:</label>
                     <input
@@ -178,12 +218,6 @@ function BusinessCardRegistration() {
                     >Create Card
                     </button>
                 </div>
-                {
-                    error && 
-                    <div className="text-danger">
-                        {error}
-                    </div>
-                }
                 <hr/>
             </div>
         </>
