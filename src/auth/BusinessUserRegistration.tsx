@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Title from "../components/Title";
 import { postRequest } from "../services/apiService";
-import { IUserData } from "../types/types";
+import { IError, IUserData } from "../types/types";
 
 function BusinessUserRegistration() {
     // States
@@ -12,7 +12,7 @@ function BusinessUserRegistration() {
     const [name, setName] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const [error, setError] = useState<string>('');
+    const [error, setError] = useState<IError>({});
 
     function submit() {
         const schema = Joi.object().keys({
@@ -27,14 +27,23 @@ function BusinessUserRegistration() {
             email,
             password,
             isBiz: true
-        });
+        },{abortEarly: false});
 
         if (error) {
-            setError(error.message);
+            const result : IError = {};
+
+            error.details.forEach((item) => {
+            if (item.context) {
+                    const key = item.context.key + '';
+                    result[key] = item.message;
+                }
+            })
+
+            setError(result);
             return;
         }
 
-        setError('');
+        setError({});
         register(value);  
     }
 
@@ -98,6 +107,12 @@ function BusinessUserRegistration() {
                     >
                     </input>
                 </div>
+                {
+                    error && error.name &&
+                    <div className="text-danger">
+                        {error.name}
+                    </div>
+                }                     
                 <div className="mp-3">
                     <label className="mb-2 fs-5">Email:</label>
                     <input
@@ -109,6 +124,12 @@ function BusinessUserRegistration() {
                     >
                     </input>
                 </div>
+                {
+                    error && error.email &&
+                    <div className="text-danger">
+                        {error.email}
+                    </div>
+                }                 
                 <div className="mp-3">
                     <label className="mb-2 fs-5">Password:</label>
                     <input
@@ -120,6 +141,12 @@ function BusinessUserRegistration() {
                     >
                     </input>
                 </div>
+                {
+                    error && error.password &&
+                    <div className="text-danger">
+                        {error.password}
+                    </div>
+                }                 
                 <div>
                     <button
                         onClick={submit}
@@ -127,12 +154,6 @@ function BusinessUserRegistration() {
                     >Next
                     </button>
                 </div>
-                {
-                    error &&
-                    <div className="text-danger">
-                        {error}
-                    </div>
-                }                    
                 <hr/>
             </div>
         </>
