@@ -28,7 +28,7 @@ const cardSchema = new mongoose.Schema({
     phone: {
         type: String,
         required: true,
-        minlength: 10,
+        minlength: 9,
         maxlength: 17,
     },
     image: {
