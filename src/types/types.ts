@@ -8,3 +8,19 @@ export interface IUserData {
 export interface IError {
     [key: string]: string;
 }
+
+export interface IBusinessCard {
+    _id: number;
+    title: string;
+    subTitle: string;
+    description: string;
+    address: string;
+    phone: string;
+    image: {
+        url: string;
+        alt: string;
+    };
+    bizNumber: string;
+    user_id: string;
+    createdAt: Date;
+}
