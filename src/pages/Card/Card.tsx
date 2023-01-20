@@ -18,8 +18,8 @@ function Card({
         handleEditCard
     }: Props) {
     return (  
-        <div className="col">
-            <div className="card mx-5 my-4">
+        <div className="col-12 col-md-6 col-lg-4">
+            <div className="card">
                 <img 
                 src="https://cdn.pixabay.com/photo/2018/03/03/19/29/skyscraper-3196390_1280.jpg"   
                 className="card-img-top rounded" alt="alt" />  

@@ -8,18 +8,23 @@ function BusinessCards() {
     const delBusinessCard = context.delBusinessCard || function () {} ;
     const editBusinessCard = context.editBusinessCard || function () {} ;
 
+    console.log(businessCards);
+
     return (
-        <div className="d-flex justify-content-around">
-            {
-                businessCards.map((card) => 
-                    <Card 
-                        key={card._id}
-                        {...card}
-                        handleDeleteCard={() => delBusinessCard(card)}
-                        handleEditCard={() => editBusinessCard(card)}
-                    />
-                )
-            }
+        
+        <div className="container">
+            <div className="row g-3">
+                {
+                    businessCards.map((card) => 
+                        <Card 
+                            key={card._id}
+                            {...card}
+                            handleDeleteCard={() => delBusinessCard(card)}
+                            handleEditCard={() => editBusinessCard(card)}
+                        />
+                    )
+                }
+            </div>
         </div>
     );
 }
