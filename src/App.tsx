@@ -11,7 +11,6 @@ import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import About from './pages/About/About';
 import BusinessCardRegistration from './pages/BusinessCardRegistration/BusinessCardRegistration';
-import Card from './pages/Card/Card';
 import FavoriteCards from './pages/FavoriteCards/FavoriteCards';
 import Home from './pages/Home/Home';
 import MyCards from './pages/MyCards/MyCards';
@@ -115,10 +114,6 @@ function App() {
                     <Route 
                         path="/"
                         element={<Home />}  
-                    />
-                    <Route
-                        path="/card"
-                        element={<Card />} 
                     />
                     <Route
                         path="/about"

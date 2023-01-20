@@ -36,11 +36,11 @@ function Home() {
     useEffect(getBusinessCards,[]);
 
     function delBusinessCard(businessCard: IBusinessCard) {
-
+        console.log(`Delete button pressed from ${businessCard.title}`);
     }
 
     function editBusinessCard(businessCard: IBusinessCard) {
-
+        console.log(`Edit button pressed from ${businessCard.title}`);
     }
 
     return (  
