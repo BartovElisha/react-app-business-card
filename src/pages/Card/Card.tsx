@@ -10,6 +10,7 @@ function Card() {
                     <p><strong>Phone:</strong></p>
                     <p><strong>Address:</strong></p>
                     <p><strong>Card Number:</strong></p>
+                    <hr />
                     <div className="d-flex justify-content-evenly">
                         <button className="btn btn-default">
                             <i className="bi-pen"></i>
