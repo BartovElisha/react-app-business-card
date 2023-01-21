@@ -48,7 +48,6 @@ function Card({
                     <p><strong>Address: </strong>{address}</p>
                     <p><strong>Phone: </strong>{phone}</p>
                     <p><strong>Card Number: </strong>{bizNumber}</p>
-                    <p><strong>Created By: </strong>{user_id}</p>
                     <hr />
                     <div className="d-flex justify-content-evenly">
                         {
