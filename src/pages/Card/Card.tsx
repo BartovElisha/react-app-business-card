@@ -7,6 +7,7 @@ interface Props {
     address: string;
     phone: string;
     bizNumber: string;
+    user_id: string;
     handleDeleteCard: Function;
     handleEditCard: Function;
 }
@@ -17,6 +18,7 @@ function Card({
         address,
         phone,
         bizNumber,
+        user_id,
         handleDeleteCard,
         handleEditCard
     }: Props) {
@@ -25,7 +27,13 @@ function Card({
 
     if (!context) {
         return <div>Error</div>;
-    }    
+    }  
+    
+    // Check if this card created by signedin user.
+    let isCurrentUser: boolean = false;
+    if (user_id === context.user_id) {
+        isCurrentUser = true;
+    }
 
     return (  
         <div className={context.cardsDisplayMode}>
@@ -40,18 +48,24 @@ function Card({
                     <p><strong>Address: </strong>{address}</p>
                     <p><strong>Phone: </strong>{phone}</p>
                     <p><strong>Card Number: </strong>{bizNumber}</p>
+                    <p><strong>Created By: </strong>{user_id}</p>
                     <hr />
                     <div className="d-flex justify-content-evenly">
-                        <button 
-                            onClick={(e) => handleEditCard(e)}
-                            className="btn btn-default">
-                            <i className="bi-pen"></i>
-                        </button>
-                        <button 
-                            onClick={(e) => handleDeleteCard(e)}
-                            className="btn btn-default">
-                            <i className="bi-trash"></i>
-                        </button>
+                        {
+                            isCurrentUser &&
+                            <>
+                                <button 
+                                    onClick={(e) => handleEditCard(e)}
+                                    className="btn btn-default">
+                                    <i className="bi-pen"></i>
+                                </button>
+                                <button 
+                                    onClick={(e) => handleDeleteCard(e)}
+                                    className="btn btn-default">
+                                    <i className="bi-trash"></i>
+                                </button>
+                            </>
+                        }
                         <button 
                             className="btn btn-default">
                             <i className="bi-hand-thumbs-up"></i>
