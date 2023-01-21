@@ -10,7 +10,7 @@ function BusinessCards() {
 
     return (        
         <div className="container">
-            <div className="row g-3">
+            <div className="row g-4 m-auto">
                 {
                     businessCards.map((card) => 
                         <Card 

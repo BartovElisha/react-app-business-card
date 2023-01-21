@@ -1,4 +1,5 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { AppContext } from "../../App";
 import BusinessCards from "../../components/BusinessCards";
 import MenuBar from "../../components/MenuBar";
 import Title from "../../components/Title";
@@ -14,12 +15,13 @@ interface Context {
 export const BusinessCardContext = createContext<Context>({})
 
 function MyCards() {
-    // States
+    // Hooks & States
+    const context = useContext(AppContext);
     const [myBusinessCards, setMyBusinessCards] = useState<Array<IBusinessCard>>([]);
 
     function getMyBusinessCards() {
-        const res = getRequest('cards');
-
+        const res = getRequest(`cards/user/${context?.user_id}`);
+        
         if(!res) {
             console.log('No response...')
             return;
@@ -29,11 +31,9 @@ function MyCards() {
         .then(response => response.json())
         .then(json => {
             setMyBusinessCards(json);
+            console.log(res);
         });
     }
-
-    // Hook useEffect, Run getBusinessCards function only ones time then page loades.
-    useEffect(getMyBusinessCards,[]);
 
     function delMyBusinessCard(myBusinessCard: IBusinessCard) {
         console.log(`Delete button pressed from ${myBusinessCard.title}`);
@@ -42,7 +42,14 @@ function MyCards() {
     function editMyBusinessCard(myBusinessCard: IBusinessCard) {
         console.log(`Edit button pressed from ${myBusinessCard.title}`);
     }
-        
+
+    // Hook useEffect, Run getBusinessCards function only ones time then page loades.
+    useEffect(getMyBusinessCards,[]);
+
+    if (!context) {
+        return <div>Error</div>
+    }       
+
     return ( 
         <BusinessCardContext.Provider value={{ myBusinessCards, delMyBusinessCard, editMyBusinessCard }}>
             <Title 

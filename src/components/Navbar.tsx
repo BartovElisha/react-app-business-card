@@ -6,7 +6,14 @@ import User from "./User";
 
 function Navbar() {
     const context = useContext(AppContext);
+    if (!context) {
+        return <div>Error</div>;
+    }
+
     const isSignedIn = context && context.userName.length > 0;
+    console.log(`isSignedIn status: ${isSignedIn}`);
+    console.log(`User: ${context.userName}`);
+    console.log(`User: ${context.user_id}`);
 
     return (  
         <header>

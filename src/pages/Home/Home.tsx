@@ -32,16 +32,16 @@ function Home() {
         });
     }
 
-    // Hook useEffect, Run getBusinessCards function only ones time then page loades.
-    useEffect(getBusinessCards,[]);
-
     function delBusinessCard(businessCard: IBusinessCard) {
         console.log(`Delete button pressed from ${businessCard.title}`);
     }
 
     function editBusinessCard(businessCard: IBusinessCard) {
         console.log(`Edit button pressed from ${businessCard.title}`);
-    }
+    }    
+
+    // Hook useEffect, Run getBusinessCards function only ones time then page loades.
+    useEffect(getBusinessCards,[]);
 
     return (  
         <BusinessCardContext.Provider value={{ businessCards, delBusinessCard, editBusinessCard }}>

@@ -18,6 +18,7 @@ import { postRequest } from './services/apiService';
 
 interface Context {
     userName: string;
+    user_id: string;
     isAdmin: boolean;
     cardsDisplayMode: string;
     handleSignout: Function;
@@ -36,6 +37,7 @@ function App() {
     // States
     const navigate = useNavigate();
     const [userName, setUserName] = useState<string>('');
+    const [user_id, setUser_id] = useState<string>('');
     const [isAdmin,setIsAdmin] = useState<boolean>(false);
     const [cardsDisplayMode, setCardsDisplayMode] = useState<string>('col-12 col-md-6 col-lg-4');  
 
@@ -59,6 +61,7 @@ function App() {
             theme: "colored",
         });        
         setUserName('');
+        setUser_id('');
         setIsAdmin(false); 
         navigate('/signin')
     }
@@ -89,6 +92,7 @@ function App() {
                 });                
                 return;
             }
+            console.log(json);
             toast.success(`User ${json.name} succsessifully Loged In`,{
                 position: "top-center",
                 autoClose: 3000,
@@ -103,6 +107,7 @@ function App() {
             localStorage.setItem('admin',json.isAdmin);
             setIsAdmin(json.isAdmin);
             setUserName(json.name);
+            setUser_id(json.id);
             navigate('/mycards');
         });
     }
@@ -110,6 +115,7 @@ function App() {
     return (
         <AppContext.Provider value={{
             userName,
+            user_id,
             isAdmin,
             cardsDisplayMode,
             handleSignout,
