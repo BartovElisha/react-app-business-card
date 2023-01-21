@@ -15,15 +15,20 @@ import FavoriteCards from './pages/FavoriteCards/FavoriteCards';
 import Home from './pages/Home/Home';
 import MyCards from './pages/MyCards/MyCards';
 import { postRequest } from './services/apiService';
+import { IBusinessCard } from './types/types';
 
 interface Context {
     userName: string;
     user_id: string;
     isAdmin: boolean;
     cardsDisplayMode: string;
+    businessCards: Array<IBusinessCard>;
     handleSignout: Function;
     signIn: Function;    
     handleCardsDisplayMode: Function;
+    delBusinessCard: Function;
+    editBusinessCard: Function;  
+    updateBusinessCards: Function;
 }
 
 interface ISigninData {
@@ -40,6 +45,7 @@ function App() {
     const [user_id, setUser_id] = useState<string>('');
     const [isAdmin,setIsAdmin] = useState<boolean>(false);
     const [cardsDisplayMode, setCardsDisplayMode] = useState<string>('col-12 col-md-6 col-lg-4');  
+    const [businessCards, setBusinessCards] = useState<Array<IBusinessCard>>([]);
 
     function handleCardsDisplayMode(displayType: string)
     {
@@ -92,7 +98,6 @@ function App() {
                 });                
                 return;
             }
-            console.log(json);
             toast.success(`User ${json.name} succsessifully Loged In`,{
                 position: "top-center",
                 autoClose: 3000,
@@ -112,15 +117,31 @@ function App() {
         });
     }
 
+    function updateBusinessCards(businessCards: Array<IBusinessCard>) {
+        setBusinessCards(businessCards);    
+    }    
+
+    function delBusinessCard(businessCard: IBusinessCard) {
+        console.log(`Delete button pressed from ${businessCard.title}`);
+    }
+
+    function editBusinessCard(businessCard: IBusinessCard) {
+        console.log(`Edit button pressed from ${businessCard.title}`);
+    }     
+
     return (
         <AppContext.Provider value={{
             userName,
             user_id,
             isAdmin,
             cardsDisplayMode,
+            businessCards,
             handleSignout,
             signIn,
-            handleCardsDisplayMode            
+            handleCardsDisplayMode,
+            delBusinessCard,
+            editBusinessCard,
+            updateBusinessCards                          
         }}>
             <div className="d-flex h-100 flex-column justify-content-between">
                 <Navbar />

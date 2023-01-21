@@ -1,24 +1,18 @@
-import { createContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
+import { toast } from "react-toastify";
+import { AppContext } from "../../App";
 import BusinessCards from "../../components/BusinessCards";
 import MenuBar from "../../components/MenuBar";
 import Title from "../../components/Title";
 import { getRequest } from "../../services/apiService";
-import { IBusinessCard } from "../../types/types";
-
-interface Context {
-    businessCards?: Array<IBusinessCard>; 
-    delBusinessCard?: Function;
-    editBusinessCard?: Function;   
-}
-
-export const BusinessCardContext = createContext<Context>({})
 
 function Home() {
-    // States
-    const [businessCards, setBusinessCards] = useState<Array<IBusinessCard>>([]);
-
+    const context = useContext(AppContext);
+    
     function getBusinessCards() {
         const res = getRequest('cards');
+
+        console.log("get Business Cards");
 
         if(!res) {
             console.log('No response...')
@@ -28,30 +22,35 @@ function Home() {
         res
         .then(response => response.json())
         .then(json => {
-            setBusinessCards(json);
+            if (json.error) {
+                toast.error(json.error, {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });                
+                return;
+            }     
+            context?.updateBusinessCards(json);
         });
     }
-
-    function delBusinessCard(businessCard: IBusinessCard) {
-        console.log(`Delete button pressed from ${businessCard.title}`);
-    }
-
-    function editBusinessCard(businessCard: IBusinessCard) {
-        console.log(`Edit button pressed from ${businessCard.title}`);
-    }    
 
     // Hook useEffect, Run getBusinessCards function only ones time then page loades.
     useEffect(getBusinessCards,[]);
 
     return (  
-        <BusinessCardContext.Provider value={{ businessCards, delBusinessCard, editBusinessCard }}>
+        <>        
             <Title 
                 main="Business Card App"
                 sub="Here you will find business cards."
             />
             <MenuBar />
             <BusinessCards />
-        </BusinessCardContext.Provider>
+        </>
     );
 }
 

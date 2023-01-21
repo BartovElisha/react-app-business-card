@@ -1,25 +1,17 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { AppContext } from "../../App";
 import BusinessCards from "../../components/BusinessCards";
 import MenuBar from "../../components/MenuBar";
 import Title from "../../components/Title";
 import { getRequest } from "../../services/apiService";
-import { IBusinessCard } from "../../types/types";
-
-interface Context {
-    myBusinessCards?: Array<IBusinessCard>; 
-    delMyBusinessCard?: Function;
-    editMyBusinessCard?: Function;   
-}
-
-export const BusinessCardContext = createContext<Context>({})
 
 function MyCards() {
-    // Hooks & States
     const context = useContext(AppContext);
-    const [myBusinessCards, setMyBusinessCards] = useState<Array<IBusinessCard>>([]);
+    const navigate = useNavigate();
 
-    function getMyBusinessCards() {
+    function getBusinessCards() {
         const res = getRequest(`cards/user/${context?.user_id}`);
         
         if(!res) {
@@ -30,35 +22,41 @@ function MyCards() {
         res
         .then(response => response.json())
         .then(json => {
-            setMyBusinessCards(json);
-            console.log(res);
+            if (json.error) {
+                toast.error(json.error, {
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "colored",
+                });                
+                return;
+            }     
+            context?.updateBusinessCards(json);
         });
     }
 
-    function delMyBusinessCard(myBusinessCard: IBusinessCard) {
-        console.log(`Delete button pressed from ${myBusinessCard.title}`);
-    }
-
-    function editMyBusinessCard(myBusinessCard: IBusinessCard) {
-        console.log(`Edit button pressed from ${myBusinessCard.title}`);
-    }
-
     // Hook useEffect, Run getBusinessCards function only ones time then page loades.
-    useEffect(getMyBusinessCards,[]);
-
-    if (!context) {
-        return <div>Error</div>
-    }       
+    useEffect(() => {
+        if (!context?.user_id) {
+            navigate('/signin');
+            return;
+        }
+        getBusinessCards();
+    },[]);
 
     return ( 
-        <BusinessCardContext.Provider value={{ myBusinessCards, delMyBusinessCard, editMyBusinessCard }}>
+        <>
             <Title 
                 main="Your Cards List"
                 sub="Here you can view your cards list"
             /> 
             <MenuBar />
             <BusinessCards />
-        </BusinessCardContext.Provider>
+        </>
     );
 }
 
