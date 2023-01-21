@@ -1,3 +1,6 @@
+import { useContext } from "react";
+import { AppContext } from "../../App";
+
 interface Props {
     title: string;
     subTitle: string;
@@ -17,8 +20,15 @@ function Card({
         handleDeleteCard,
         handleEditCard
     }: Props) {
+    
+    const context = useContext(AppContext);
+
+    if (!context) {
+        return <div>Error</div>;
+    }    
+
     return (  
-        <div className="col-12 col-md-6 col-lg-4">
+        <div className={context.cardsDisplayMode}>
             <div className="card">
                 <img 
                 src="https://cdn.pixabay.com/photo/2018/03/03/19/29/skyscraper-3196390_1280.jpg"   

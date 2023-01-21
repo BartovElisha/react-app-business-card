@@ -8,10 +8,7 @@ function BusinessCards() {
     const delBusinessCard = context.delBusinessCard || function () {} ;
     const editBusinessCard = context.editBusinessCard || function () {} ;
 
-    console.log(businessCards);
-
-    return (
-        
+    return (        
         <div className="container">
             <div className="row g-3">
                 {

@@ -3,6 +3,7 @@ import { AppContext } from "../App";
 
 function User() {
     const context = useContext(AppContext);
+    
     if (!context) {
         return <div>Error</div>
     }

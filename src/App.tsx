@@ -16,16 +16,18 @@ import Home from './pages/Home/Home';
 import MyCards from './pages/MyCards/MyCards';
 import { postRequest } from './services/apiService';
 
+interface Context {
+    userName: string;
+    isAdmin: boolean;
+    cardsDisplayMode: string;
+    handleSignout: Function;
+    signIn: Function;    
+    handleCardsDisplayMode: Function;
+}
+
 interface ISigninData {
     email: string;
     password: string;
-}
-
-interface Context {
-    userName: string;
-    handleSignout: Function;
-    signIn: Function;
-    isAdmin: boolean;
 }
 
 export const AppContext = createContext<Context | null>(null);
@@ -33,9 +35,14 @@ export const AppContext = createContext<Context | null>(null);
 function App() {
     // States
     const navigate = useNavigate();
-    const [userName, setUserName] = useState('');
-    const [isAdmin,setIsAdmin] = useState(false);
-  
+    const [userName, setUserName] = useState<string>('');
+    const [isAdmin,setIsAdmin] = useState<boolean>(false);
+    const [cardsDisplayMode, setCardsDisplayMode] = useState<string>('col-12 col-md-6 col-lg-4');  
+
+    function handleCardsDisplayMode(displayType: string)
+    {
+        setCardsDisplayMode(displayType);
+    }
 
     function handleSignout() {
         // 1. Clear Local Storage
@@ -103,9 +110,11 @@ function App() {
     return (
         <AppContext.Provider value={{
             userName,
+            isAdmin,
+            cardsDisplayMode,
             handleSignout,
             signIn,
-            isAdmin
+            handleCardsDisplayMode            
         }}>
             <div className="d-flex h-100 flex-column justify-content-between">
                 <Navbar />
