@@ -101,7 +101,7 @@ function BusinessCardRegistration() {
                 progress: undefined,
                 theme: "colored",
             });              
-            navigate('/card');
+            navigate('/');
         });
     }
 
