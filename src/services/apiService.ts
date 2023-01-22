@@ -8,18 +8,19 @@ const handleRequest = (
     headers?: HeadersInit,
     data?: object,
     checkToken = true): Promise<Response> | null => {
-        if (checkToken && !verifyToken()) {
-            return null;
-        }
+        
+    if (checkToken && !verifyToken()) {
+        return null;
+    }
 
-        const config = {
-            method,
-            headers: {
-                ...headers,
-                'x-auth-token' : getToken()
-            },
-            body: (data) ? JSON.stringify(data) : null
-        }
+    const config = {
+        method,
+        headers: {
+            ...headers,
+            'x-auth-token' : getToken()
+        },
+        body: (data) ? JSON.stringify(data) : null
+    }
 
     return fetch(url, config);
 }

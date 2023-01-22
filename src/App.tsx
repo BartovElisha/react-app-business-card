@@ -113,7 +113,7 @@ function App() {
             setIsAdmin(json.isAdmin);
             setUserName(json.name);
             setUser_id(json.id);
-            navigate('/mycards');
+            navigate('/');
         });
     }
 
@@ -149,7 +149,11 @@ function App() {
                 <Routes>
                     <Route 
                         path="/"
-                        element={<Home />}  
+                        element={
+                            <RouteGuard>
+                                <Home />
+                            </RouteGuard>                            
+                        }  
                     />
                     <Route
                         path="/about"

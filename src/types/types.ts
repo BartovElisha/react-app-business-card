@@ -16,10 +16,7 @@ export interface IBusinessCard {
     description: string;
     address: string;
     phone: string;
-    image: {
-        url: string;
-        alt: string;
-    };
+    image: string;
     bizNumber: string;
     user_id: string;
     createdAt: Date;

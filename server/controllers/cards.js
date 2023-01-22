@@ -73,8 +73,9 @@ module.exports = {
                 description: joi.string().min(2).max(1024).required(),
                 address: joi.string().min(2).max(256).required(),
                 phone: joi.string().min(9).max(17).required(),
-                url: joi.string().min(6).max(1024),
-                alt: joi.string().min(2).max(256),
+                image: joi.string().min(6).max(1024),
+                // url: joi.string().min(6).max(1024),
+                // alt: joi.string().min(2).max(256),
             });
 
             const { error, value } = schema.validate(req.body);
@@ -84,18 +85,21 @@ module.exports = {
                 throw 'error add card';
             }
 
+            console.log(value.image);
+
             const card = new Card({
                 title: value.title,
                 subTitle: value.subTitle,
                 description: value.description,
                 address: value.address,
                 phone: value.phone,
-                image: {
-                    url: value.url
-                        ? value.url
-                        : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-                    alt: value.alt ? value.alt : "Pic Of Business Card",
-                },
+                image: value.image,
+                // image: {
+                //     url: value.url
+                //         ? value.url
+                //         : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+                //     alt: value.alt ? value.alt : "Pic Of Business Card",
+                // },
                 bizNumber: Math.floor(Math.random() * 10000000),
                 user_id: user._id,
             });

@@ -12,8 +12,6 @@ function Home() {
     function getBusinessCards() {
         const res = getRequest('cards');
 
-        console.log("get Business Cards");
-
         if(!res) {
             console.log('No response...')
             return;

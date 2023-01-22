@@ -6,6 +6,7 @@ interface Props {
     subTitle: string;
     address: string;
     phone: string;
+    image: string;
     bizNumber: string;
     user_id: string;
     handleDeleteCard: Function;
@@ -17,6 +18,7 @@ function Card({
         subTitle,
         address,
         phone,
+        image,
         bizNumber,
         user_id,
         handleDeleteCard,
@@ -39,8 +41,8 @@ function Card({
         <div className={context.cardsDisplayMode}>
             <div className="card">
                 <img 
-                src="https://cdn.pixabay.com/photo/2018/03/03/19/29/skyscraper-3196390_1280.jpg"   
-                className="card-img-top rounded" alt="alt" />  
+                src={`${image}`}   
+                className="card-img-top rounded" alt={`Img ${title}`} />  
                 <div className="card-body">
                     <h5 className="card-title text-start">{title}</h5>
                     <span className="text-muted">{subTitle}</span>

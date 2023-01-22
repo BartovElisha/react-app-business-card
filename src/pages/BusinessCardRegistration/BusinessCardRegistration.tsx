@@ -2,7 +2,6 @@ import Joi from "joi";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { AppContext } from "../../App";
 import Title from "../../components/Title";
 import { postRequest } from "../../services/apiService";
 import { IError } from "../../types/types";
@@ -13,15 +12,10 @@ interface IBusinessCardData {
     description: string;
     address: string;
     phone: string;
-    image: {
-        url: string;
-        alt: string;
-    };
+    image: string;
 }
 
-function BusinessCardRegistration() {
-    const context = useContext(AppContext);
-          
+function BusinessCardRegistration() {          
     // States
     const navigate = useNavigate();
     const [title, setTitle] = useState<string>('');
@@ -38,7 +32,8 @@ function BusinessCardRegistration() {
             subTitle: Joi.string().required().min(2).max(255),
             description: Joi.string().required().min(2).max(1024),
             address: Joi.string().required().min(2).max(255),
-            phone: Joi.string().min(9).max(17).required(),
+            phone: Joi.string().required().min(9).max(17),
+            image: Joi.string().required().min(2).max(1024),
         });
 
         const { error, value } = schema.validate({
@@ -46,7 +41,8 @@ function BusinessCardRegistration() {
             subTitle,
             description,
             address,
-            phone
+            phone,
+            image
         },{abortEarly: false});
 
         if (error) {
@@ -68,6 +64,7 @@ function BusinessCardRegistration() {
     }
 
     function createCard(data: IBusinessCardData) {
+        console.log(data);
         const res = postRequest(
             'cards',
             data,
@@ -210,7 +207,12 @@ function BusinessCardRegistration() {
                         onChange={(e) => setImage(e.target.value)}
                     >
                     </input>
-                </div>
+                </div>                {
+                    error && error.image && 
+                    <div className="text-danger">
+                        {error.image}
+                    </div>
+                }   
                 <div>
                     <button
                         onClick={submit}
