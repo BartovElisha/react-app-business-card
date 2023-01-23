@@ -14,7 +14,7 @@ import BusinessCardRegistration from './pages/BusinessCardRegistration/BusinessC
 import FavoriteCards from './pages/FavoriteCards/FavoriteCards';
 import Home from './pages/Home/Home';
 import MyCards from './pages/MyCards/MyCards';
-import { postRequest } from './services/apiService';
+import { deleteRequest, postRequest } from './services/apiService';
 import { IBusinessCard } from './types/types';
 
 interface Context {
@@ -122,7 +122,32 @@ function App() {
     }    
 
     function delBusinessCard(businessCard: IBusinessCard) {
-        console.log(`Delete button pressed from ${businessCard.title}`);
+        // console.log(`Delete button pressed from ${businessCard.title}`);
+        const res = deleteRequest(
+            `cards/${businessCard._id}`            
+        );
+        if (!res) {
+            return;
+        }
+
+        res
+        .then(response => response.json())
+        .then(json => {
+            const updated = [...businessCards].filter(
+                businessCardItem => businessCardItem._id !== businessCard._id
+            );
+            toast.info(`Business Card ${json.title} was deleted`,{
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: false,
+                progress: undefined,
+                theme: "colored",
+            }); 
+            setBusinessCards(updated);
+        });        
     }
 
     function editBusinessCard(businessCard: IBusinessCard) {

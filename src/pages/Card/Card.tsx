@@ -73,7 +73,7 @@ function Card({
                             {/* <i className="bi-hand-thumbs-up-fill"></i> */}
                         </button>                          
                     </div>
-                </div>  
+                </div>
             </div>
         </div>
     );
