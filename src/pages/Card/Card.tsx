@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { AppContext } from "../../App";
 
 interface Props {
@@ -55,11 +56,11 @@ function Card({
                         {
                             isCurrentUser &&
                             <>
-                                <button 
-                                    onClick={(e) => handleEditCard(e)}
+                                <Link 
+                                    to={`/edit`}
                                     className="btn btn-default">
                                     <i className="bi-pen"></i>
-                                </button>
+                                </Link>
                                 <button 
                                     onClick={(e) => handleDeleteCard(e)}
                                     className="btn btn-default">

@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import About from './pages/About/About';
 import BusinessCardRegistration from './pages/BusinessCardRegistration/BusinessCardRegistration';
+import Edit from './pages/Edit/Edit';
 import FavoriteCards from './pages/FavoriteCards/FavoriteCards';
 import Home from './pages/Home/Home';
 import MyCards from './pages/MyCards/MyCards';
@@ -219,7 +220,15 @@ function App() {
                                 <FavoriteCards />
                             </RouteGuard>                            
                         } 
-                    />                      
+                    />    
+                    <Route 
+                        path="/edit"
+                        element={
+                            <RouteGuard>
+                                <Edit />
+                            </RouteGuard>
+                        }
+                    />                  
                 </Routes>
                 <Footer />
             </div>
