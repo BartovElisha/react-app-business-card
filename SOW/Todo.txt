@@ -8,6 +8,9 @@
 
 1. How set footer on bottom of the Page ? -> Done
 2. How to do JOI validation each Input itself error message ? -> Done
-3. Why setVacations dont update array imideatly ?
-4. Why image url and alt defaut from server ? not my image.
-5. Need add new collection for favorite cards ?
+3. Why setVacations dont update array imideatly ? -> Done
+4. Why image url and alt defaut from server ? not my image. -> Done
+5. Need add new collection for favorite cards ? -> No, need add array of favorite cards in server side to user.
+6. Add Search function.
+7. Add About card element.
+8. Add Error <div> message if no cards found.
