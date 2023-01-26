@@ -222,7 +222,7 @@ function App() {
                         } 
                     />    
                     <Route 
-                        path="/edit"
+                        path="/edit/:id"
                         element={
                             <RouteGuard>
                                 <Edit />

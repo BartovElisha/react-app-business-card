@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Title from "../../components/Title";
@@ -64,7 +64,7 @@ function BusinessCardRegistration() {
     }
 
     function createCard(data: IBusinessCardData) {
-        console.log(data);
+        console.log(data)
         const res = postRequest(
             'cards',
             data,

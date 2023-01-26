@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AppContext } from "../../App";
 
 interface Props {
+    _id: number;
     title: string;
     subTitle: string;
     address: string;
@@ -11,10 +12,10 @@ interface Props {
     bizNumber: string;
     user_id: string;
     handleDeleteCard: Function;
-    handleEditCard: Function;
 }
 
 function Card({
+        _id,
         title,
         subTitle,
         address,
@@ -22,8 +23,7 @@ function Card({
         image,
         bizNumber,
         user_id,
-        handleDeleteCard,
-        handleEditCard
+        handleDeleteCard
     }: Props) {
     
     const context = useContext(AppContext);
@@ -57,7 +57,7 @@ function Card({
                             isCurrentUser &&
                             <>
                                 <Link 
-                                    to={`/edit`}
+                                    to={`/edit/${_id}`}
                                     className="btn btn-default">
                                     <i className="bi-pen"></i>
                                 </Link>

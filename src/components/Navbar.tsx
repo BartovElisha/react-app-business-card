@@ -11,9 +11,9 @@ function Navbar() {
     }
 
     const isSignedIn = context && context.userName.length > 0;
-    console.log(`isSignedIn status: ${isSignedIn}`);
-    console.log(`User: ${context.userName}`);
-    console.log(`User: ${context.user_id}`);
+    // console.log(`isSignedIn status: ${isSignedIn}`);
+    // console.log(`User: ${context.userName}`);
+    // console.log(`User: ${context.user_id}`);
 
     return (  
         <header>

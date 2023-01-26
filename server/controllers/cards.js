@@ -123,13 +123,12 @@ module.exports = {
                 subTitle: joi.string().min(2).max(256).required(),
                 description: joi.string().min(2).max(1024).required(),
                 address: joi.string().min(2).max(256).required(),
-                phone: joi.string().min(9).max(14).required(),
-                url: joi.string().min(6).max(1024),
+                phone: joi.string().min(9).max(17).required(),
+                image: joi.string().min(6).max(1024),
                 alt: joi.string().min(2).max(256),
             }).min(1);
 
             const { error, value } = schema.validate(req.body);
-
             if (error) {
                 console.log(error.details[0].message);
                 throw 'error updating card';

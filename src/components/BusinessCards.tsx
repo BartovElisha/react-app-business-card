@@ -11,7 +11,6 @@ function BusinessCards() {
 
     const businessCards = context.businessCards || [];
     const delBusinessCard = context.delBusinessCard || function () {} ;
-    const editBusinessCard = context.editBusinessCard || function () {} ;
 
     return (        
         <div className="container mb-5">
@@ -22,7 +21,6 @@ function BusinessCards() {
                             key={card._id}
                             {...card}
                             handleDeleteCard={() => delBusinessCard(card)}
-                            handleEditCard={() => editBusinessCard(card)}
                         />
                     )
                 }
