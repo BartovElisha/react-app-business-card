@@ -24,12 +24,13 @@ interface Context {
     isAdmin: boolean;
     cardsDisplayMode: string;
     businessCards: Array<IBusinessCard>;
+    filteredBusinessCards: Array<IBusinessCard>;
     handleSignout: Function;
     signIn: Function;    
     handleCardsDisplayMode: Function;
     delBusinessCard: Function;
-    editBusinessCard: Function;  
     updateBusinessCards: Function;
+    searchBusinessCard: Function;     
 }
 
 interface ISigninData {
@@ -47,6 +48,8 @@ function App() {
     const [isAdmin,setIsAdmin] = useState<boolean>(false);
     const [cardsDisplayMode, setCardsDisplayMode] = useState<string>('col-12 col-md-6 col-lg-4');  
     const [businessCards, setBusinessCards] = useState<Array<IBusinessCard>>([]);
+    const [filteredBusinessCards, setFilteredBusinessCards] = 
+        useState<Array<IBusinessCard>>([...businessCards]);
 
     function handleCardsDisplayMode(displayType: string)
     {
@@ -118,10 +121,6 @@ function App() {
         });
     }
 
-    function updateBusinessCards(businessCards: Array<IBusinessCard>) {
-        setBusinessCards(businessCards);    
-    }    
-
     function delBusinessCard(businessCard: IBusinessCard) {
         // console.log(`Delete button pressed from ${businessCard.title}`);
         const res = deleteRequest(
@@ -151,8 +150,13 @@ function App() {
         });        
     }
 
-    function editBusinessCard(businessCard: IBusinessCard) {
-        console.log(`Edit button pressed from ${businessCard.title}`);
+    function updateBusinessCards(cards: Array<IBusinessCard>) {
+        setBusinessCards(cards);   
+        setFilteredBusinessCards(cards);
+    }     
+
+    function searchBusinessCard(cards: Array<IBusinessCard>) {
+        setFilteredBusinessCards(cards);
     }     
 
     return (
@@ -162,12 +166,13 @@ function App() {
             isAdmin,
             cardsDisplayMode,
             businessCards,
+            filteredBusinessCards,
             handleSignout,
             signIn,
             handleCardsDisplayMode,
             delBusinessCard,
-            editBusinessCard,
-            updateBusinessCards                          
+            updateBusinessCards,
+            searchBusinessCard                                      
         }}>
             <div className="d-flex h-100 flex-column justify-content-between">
                 <Navbar />

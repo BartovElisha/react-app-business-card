@@ -9,6 +9,8 @@ import { getRequest } from "../../services/apiService";
 
 function MyCards() {
     const context = useContext(AppContext);
+    const updateBusinessCards = context?.updateBusinessCards || function() {}; 
+
     const navigate = useNavigate();
 
     function getBusinessCards() {
@@ -35,7 +37,7 @@ function MyCards() {
                 });                
                 return;
             }     
-            context?.updateBusinessCards(json);
+            updateBusinessCards(json);
         });
     }
 

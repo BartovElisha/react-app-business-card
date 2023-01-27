@@ -9,14 +9,21 @@ function BusinessCards() {
         return <div>Error</div>;
     }
 
-    const businessCards = context.businessCards || [];
+    const filteredBusinessCards = context.filteredBusinessCards || [];
     const delBusinessCard = context.delBusinessCard || function () {} ;
 
     return (        
         <div className="container mb-5">
             <div className="row g-4 m-auto">
                 {
-                    businessCards.map((card) => 
+                    filteredBusinessCards.length === 0 &&
+                    <div className ="alert alert-warning text-center" role="alert">
+                        No Business Cards Founds !!!
+                    </div>
+                }
+                {
+                    filteredBusinessCards.length > 0 && 
+                    filteredBusinessCards.map((card) => 
                         <Card 
                             key={card._id}
                             {...card}

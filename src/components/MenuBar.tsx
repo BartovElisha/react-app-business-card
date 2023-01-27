@@ -4,24 +4,35 @@ import { AppContext } from "../App";
 function MenuBar() {
     const context = useContext(AppContext);
     // States
-    const [searchValue, setSearch] = useState<string>('');
+    const [searchValue, setSearchValue] = useState<string>('');
     
     if (!context) {
         return <div>Error</div>
     }
 
+    const businessCards = context.businessCards || [];
+    const searchBusinessCard = context.searchBusinessCard || function() {};
+    
     function handleSearch(value: string) {
         // 1. Update form input Value
-        setSearch(value);
-        console.log(value);
+        setSearchValue(value);
 
         // 2. Convert value to lowerCase
-        let term = searchValue.toLowerCase();
+        let term = value.toLowerCase();
 
         // 3. copy businessCards to result array
+        let result = [...businessCards];
 
         // 4. Filter result by term
+        if (term.length > 0) {
+            result = [...businessCards].filter(card => 
+                (card.title.toLowerCase().includes(term)) ||
+                (card.bizNumber.includes(term))
+            );
+        }
 
+        // 5. Update state of business Cards
+        searchBusinessCard(result);
     }
 
     return (  
@@ -40,11 +51,13 @@ function MenuBar() {
                     <i className="bi-list-task"></i>
                 </button>
                 <input
+                    value={searchValue}
                     onChange={(e) => handleSearch(e.target.value)}
                     type="text"
                     className="form-control ms-3"
                     placeholder="Enter business name or number"
                 ></input>
+                
             </div>
         </div>    
     );

@@ -1,4 +1,3 @@
-import BusinessCards from "../../components/BusinessCards";
 import MenuBar from "../../components/MenuBar";
 import Title from "../../components/Title";
 
@@ -10,7 +9,7 @@ function FavoriteCards() {
                 sub="Here you can view your favorite cards list"
             />
             <MenuBar />
-            <BusinessCards />
+            {/* <BusinessCards /> */}
         </>
     );
 }
