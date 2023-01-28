@@ -20,6 +20,7 @@ function BusinessCard() {
     const [bizNumber, setBizNumber] = useState<string>('');
     const [userId, setUserId] = useState<string>('');
     const [createdAt, setcCreatedAt] = useState<string>();
+    const [error, setError] = useState<string>('');
 
     // Check if this card created by signedin user.
     let isCurrentUser: boolean = false;
@@ -39,9 +40,10 @@ function BusinessCard() {
         .then(res => res.json())
         .then(json => {
             if (json.ok === false) {
-                // setError('error get the data');
+                setError('Error get the data');
                 return;
             }
+
             // Update input fields with current card data.
             setTitle(json.title);
             setSubTitle(json.subTitle);
@@ -57,51 +59,62 @@ function BusinessCard() {
 
     return (
         <>
-            <Title 
-                main={title}
-                sub={subTitle}                
-            />
-            <div className="container mb-5">
-                <div className="card">
-                    <img 
-                    src={`${image}`}   
-                    className="card-img-top rounded img-fluid img-thumbnail" alt={`Img ${title}`} />  
-                    <div className="card-body">
-                        <p><strong>Description: </strong>{description}</p>
-                        <p><strong>Address: </strong>{address}</p>
-                        <p><strong>Phone: </strong>{phone}</p>
-                        <p><strong>Card Number: </strong>{bizNumber}</p>
-                        <p><strong>Created By: </strong>{userId}</p>
-                        <p><strong>Created At: </strong>{createdAt}</p>
-                        <hr />
-                        <div className="d-flex justify-content-evenly">
-                            {
-                                isCurrentUser &&
-                                <>
-                                    <Link 
-                                        to={`/edit/${id}`}
+            {
+                error.length > 0 &&
+                <div className ="alert alert-warning text-center" role="alert">
+                    No Business Card Found !!!
+                </div>  
+            }
+            {
+                error.length === 0  &&
+                <>
+                    <Title 
+                        main={title}
+                        sub={subTitle}                
+                    />
+                    <div className="container mb-5">
+                        <div className="card">
+                            <img 
+                            src={`${image}`}   
+                            className="card-img-top rounded img-fluid img-thumbnail" alt={`Img ${title}`} />  
+                            <div className="card-body">
+                                <p><strong>Description: </strong>{description}</p>
+                                <p><strong>Address: </strong>{address}</p>
+                                <p><strong>Phone: </strong>{phone}</p>
+                                <p><strong>Card Number: </strong>{bizNumber}</p>
+                                <p><strong>Created By: </strong>{userId}</p>
+                                <p><strong>Created At: </strong>{createdAt}</p>
+                                <hr />
+                                <div className="d-flex justify-content-evenly">
+                                    {
+                                        isCurrentUser &&
+                                        <>
+                                            <Link 
+                                                to={`/edit/${id}`}
+                                                className="btn btn-default"
+                                            >
+                                            <i className="bi bi-pen"></i>
+                                            </Link>
+                                        </>
+                                    }
+                                    <button 
                                         className="btn btn-default"
                                     >
-                                    <i className="bi bi-pen"></i>
-                                    </Link>
-                                </>
-                            }
-                            <button 
-                                className="btn btn-default"
-                            >
-                            <i className="bi-hand-thumbs-up"></i>
-                            {/* <i className="bi-hand-thumbs-up-fill"></i> */}
-                            </button> 
-                            <Link 
-                                to={`/`}
-                                className="btn btn-default"
-                            >
-                            <i className="bi bi-house-door"></i>
-                            </Link>                            
-                        </div>  
+                                    <i className="bi-hand-thumbs-up"></i>
+                                    {/* <i className="bi-hand-thumbs-up-fill"></i> */}
+                                    </button> 
+                                    <Link 
+                                        to={`/`}
+                                        className="btn btn-default"
+                                    >
+                                    <i className="bi bi-house-door"></i>
+                                    </Link>                            
+                                </div>  
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </>                
+            }
         </>
     );
 }
