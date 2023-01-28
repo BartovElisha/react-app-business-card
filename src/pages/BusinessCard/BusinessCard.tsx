@@ -83,7 +83,7 @@ function BusinessCard() {
                                 isCurrentUser &&
                                 <>
                                     <Link 
-                                        to={`/edit/${userId}`}
+                                        to={`/edit/${id}`}
                                         className="btn btn-default"
                                     >
                                     <i className="bi bi-pen"></i>
