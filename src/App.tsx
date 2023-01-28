@@ -123,7 +123,6 @@ function App() {
     }
 
     function delBusinessCard(businessCard: IBusinessCard) {
-        // console.log(`Delete button pressed from ${businessCard.title}`);
         const res = deleteRequest(
             `cards/${businessCard._id}`            
         );
@@ -148,6 +147,7 @@ function App() {
                 theme: "colored",
             }); 
             setBusinessCards(updated);
+            setFilteredBusinessCards(updated);
         });        
     }
 
