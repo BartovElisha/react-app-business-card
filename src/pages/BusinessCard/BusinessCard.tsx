@@ -54,8 +54,6 @@ function BusinessCard() {
             setBizNumber(json.bizNumber);
             setUserId(json.user_id);
             setcCreatedAt(json.createdAt);
-            console.log(json);
-            console.log(createdAt);
         })
     },[id]);   
 
