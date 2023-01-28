@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { confirmAlert } from "react-confirm-alert";
 import { Link } from "react-router-dom";
 import { AppContext } from "../App";
 
@@ -29,6 +30,31 @@ function Card({
     const context = useContext(AppContext);
     const [like, setLike] = useState<boolean>(false);
 
+    // Confirm Alert Options
+    const options = {
+        title: 'Please Confirm',
+        message: 'Are you sure you want to delete this card ?',
+        buttons: [
+            {
+                label: 'Yes',
+                onClick: () => handleDeleteCard()
+            },
+            {
+                label: 'Cancel',
+                // onClick: () => alert('Click No')
+            }
+        ],
+        closeOnEscape: true,
+        closeOnClickOutside: true,
+        keyCodeForClose: [8, 32],
+        willUnmount: () => {},
+        afterClose: () => {},
+        onClickOutside: () => {},
+        onKeypress: () => {},
+        onKeypressEscape: () => {},
+        overlayClassName: "overlay-custom-class-name"
+    };
+
     if (!context) {
         return <div>Error</div>;
     }  
@@ -43,6 +69,10 @@ function Card({
 
     function likeToggle() {
         setLike(!like);    
+    }
+
+    function confirmAndDeleteCard() {
+        confirmAlert(options);    
     }
 
     return (  
@@ -78,7 +108,7 @@ function Card({
                                 <i className="bi bi-pen"></i>
                                 </Link>
                                 <button 
-                                    onClick={(e) => handleDeleteCard(e)}
+                                    onClick={confirmAndDeleteCard}
                                     className="btn btn-default"
                                 >
                                 <i className="bi bi-trash"></i>
