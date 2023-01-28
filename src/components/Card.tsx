@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AppContext } from "../App";
 
@@ -27,17 +27,22 @@ function Card({
     }: Props) {
     
     const context = useContext(AppContext);
+    const [like, setLike] = useState<boolean>(false);
 
     if (!context) {
         return <div>Error</div>;
     }  
-
-    const signInUserId = context.user_id;
     
+    const signInUserId = context.user_id;
+   
     // Check if this card created by signedin user.
     let isCurrentUser: boolean = false;
     if (user_id === signInUserId) {
         isCurrentUser = true;
+    }
+
+    function likeToggle() {
+        setLike(!like);    
     }
 
     return (  
@@ -81,10 +86,14 @@ function Card({
                             </>
                         }
                         <button 
+                            onClick={likeToggle}
                             className="btn btn-default"
                         >
-                        <i className="bi-hand-thumbs-up"></i>
-                        {/* <i className="bi-hand-thumbs-up-fill"></i> */}
+                        {
+                            like ? 
+                                <i className="bi bi-hand-thumbs-up-fill"></i> : 
+                                <i className="bi bi-hand-thumbs-up"></i>    
+                        }
                         </button>   
                     </div>
                 </div>

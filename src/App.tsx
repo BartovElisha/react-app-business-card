@@ -159,8 +159,8 @@ function App() {
 
     function searchBusinessCard(cards: Array<IBusinessCard>) {
         setFilteredBusinessCards(cards);
-    }     
-
+    }
+    
     return (
         <AppContext.Provider value={{
             userName,
