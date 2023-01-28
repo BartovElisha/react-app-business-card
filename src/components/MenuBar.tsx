@@ -79,7 +79,7 @@ function MenuBar() {
                         onClick={clearSearch}
                         className="btn btn-default"
                     >
-                        <i className="bi bi-x-circle"></i>
+                        <i className="bi bi bi-x-octagon"></i>
                     </button>
                 }                
             </div>

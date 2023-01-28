@@ -60,7 +60,7 @@ function App() {
         // 1. Clear Local Storage
         localStorage.clear();
         // 2. Clear userName and isAdmin  
-        toast.info(`User ${userName} is Signed Out !!!`, {
+        toast.info(`See You Later ${userName}`, {
             position: "top-center",
             autoClose: 3000,
             hideProgressBar: true,
@@ -102,16 +102,17 @@ function App() {
                 });                
                 return;
             }
-            toast.success(`User ${json.name} succsessifully Loged In`,{
+            toast.success(`Welcome ${json.name}`, {
                 position: "top-center",
                 autoClose: 3000,
                 hideProgressBar: true,
                 closeOnClick: true,
                 pauseOnHover: true,
-                draggable: false,
+                draggable: true,
                 progress: undefined,
                 theme: "colored",
-            });             
+            });            
+            
             setToken(json.token);
             localStorage.setItem('admin',json.isAdmin);
             setIsAdmin(json.isAdmin);
