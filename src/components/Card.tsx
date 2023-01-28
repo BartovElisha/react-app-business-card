@@ -31,10 +31,12 @@ function Card({
     if (!context) {
         return <div>Error</div>;
     }  
+
+    const signInUserId = context.user_id;
     
     // Check if this card created by signedin user.
     let isCurrentUser: boolean = false;
-    if (user_id === context.user_id) {
+    if (user_id === signInUserId) {
         isCurrentUser = true;
     }
 
@@ -43,7 +45,7 @@ function Card({
             <div className="card">
                 <img 
                 src={`${image}`}   
-                className="card-img-top rounded" alt={`Img ${title}`} />  
+                className="card-img-top rounded img-fluid img-thumbnail" alt={`Img ${title}`} />  
                 <div className="card-body">
                     <h5 className="card-title text-start">{title}</h5>
                     <span className="text-muted">{subTitle}</span>

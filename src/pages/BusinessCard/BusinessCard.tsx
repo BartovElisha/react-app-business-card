@@ -8,8 +8,6 @@ function BusinessCard() {
     const context = useContext(AppContext);
 
     const signInUserId = context?.user_id;
-    const delBusinessCard = context?.delBusinessCard || function () {} ;
-    // const navigate = useNavigate();
     const { id } = useParams();  // Custom Hook "useParams"
 
     // States
@@ -63,11 +61,11 @@ function BusinessCard() {
                 main={title}
                 sub={subTitle}                
             />
-            <div className="container mb-4">
+            <div className="container mb-5">
                 <div className="card">
                     <img 
                     src={`${image}`}   
-                    className="card-img-top rounded" alt={`Img ${title}`} />  
+                    className="card-img-top rounded img-fluid img-thumbnail" alt={`Img ${title}`} />  
                     <div className="card-body">
                         <p><strong>Description: </strong>{description}</p>
                         <p><strong>Address: </strong>{address}</p>
@@ -86,12 +84,6 @@ function BusinessCard() {
                                     >
                                     <i className="bi bi-pen"></i>
                                     </Link>
-                                    <button 
-                                        // onClick={(e) => handleDeleteCard(e)}
-                                        className="btn btn-default"
-                                    >
-                                    <i className="bi bi-trash"></i>
-                                    </button>
                                 </>
                             }
                             <button 
