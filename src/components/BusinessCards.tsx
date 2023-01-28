@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AppContext } from "../App";
-import Card from "../pages/Card/Card";
+import Card from "./Card";
 
 function BusinessCards() {
     const context = useContext(AppContext);

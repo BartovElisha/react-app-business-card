@@ -10,6 +10,7 @@ import { setToken } from './auth/tokenMenagment';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import About from './pages/About/About';
+import BusinessCard from './pages/BusinessCard/BusinessCard';
 import BusinessCardRegistration from './pages/BusinessCardRegistration/BusinessCardRegistration';
 import Edit from './pages/Edit/Edit';
 import FavoriteCards from './pages/FavoriteCards/FavoriteCards';
@@ -234,7 +235,13 @@ function App() {
                                 <Edit />
                             </RouteGuard>
                         }
-                    />                  
+                    />       
+                    <Route
+                        path="/card/:id"
+                        element={
+                            <BusinessCard />
+                        } 
+                    />           
                 </Routes>
                 <Footer />
             </div>

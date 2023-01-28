@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AppContext } from "../../App";
+import { AppContext } from "../App";
 
 interface Props {
     _id: number;
@@ -54,25 +54,36 @@ function Card({
                     <hr />
                     <div className="d-flex justify-content-evenly">
                         {
+                            <Link
+                                to={`/card/${_id}`}
+                                className="btn btn-default"
+                            >
+                            <i className="bi bi-ticket-detailed"></i>    
+                            </Link>                            
+                        }
+                        {
                             isCurrentUser &&
                             <>
                                 <Link 
                                     to={`/edit/${_id}`}
-                                    className="btn btn-default">
-                                    <i className="bi-pen"></i>
+                                    className="btn btn-default"
+                                >
+                                <i className="bi bi-pen"></i>
                                 </Link>
                                 <button 
                                     onClick={(e) => handleDeleteCard(e)}
-                                    className="btn btn-default">
-                                    <i className="bi-trash"></i>
+                                    className="btn btn-default"
+                                >
+                                <i className="bi bi-trash"></i>
                                 </button>
                             </>
                         }
                         <button 
-                            className="btn btn-default">
-                            <i className="bi-hand-thumbs-up"></i>
-                            {/* <i className="bi-hand-thumbs-up-fill"></i> */}
-                        </button>                          
+                            className="btn btn-default"
+                        >
+                        <i className="bi-hand-thumbs-up"></i>
+                        {/* <i className="bi-hand-thumbs-up-fill"></i> */}
+                        </button>   
                     </div>
                 </div>
             </div>

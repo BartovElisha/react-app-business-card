@@ -121,7 +121,7 @@ function Edit() {
                 hideProgressBar: true,
                 closeOnClick: true,
                 pauseOnHover: true,
-                draggable: false,
+                draggable: true,
                 progress: undefined,
                 theme: "colored",
             });              
