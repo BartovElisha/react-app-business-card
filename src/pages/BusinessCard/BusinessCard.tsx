@@ -100,7 +100,7 @@ function BusinessCard() {
                                     <button 
                                         className="btn btn-default"
                                     >
-                                    <i className="bi-hand-thumbs-up"></i>
+                                    <i className="bi bi-heart"></i>
                                     {/* <i className="bi-hand-thumbs-up-fill"></i> */}
                                     </button> 
                                     <Link 

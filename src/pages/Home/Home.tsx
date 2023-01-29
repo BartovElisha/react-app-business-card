@@ -11,7 +11,7 @@ function Home() {
     const updateBusinessCards = context?.updateBusinessCards || function() {}; 
     
     function getBusinessCards() {
-        const res = getRequest('cards');
+        const res = getRequest('allcards',false);
 
         if(!res) {
             console.log('No response...')

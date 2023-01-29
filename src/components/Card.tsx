@@ -121,8 +121,8 @@ function Card({
                         >
                         {
                             like ? 
-                                <i className="bi bi-hand-thumbs-up-fill"></i> : 
-                                <i className="bi bi-hand-thumbs-up"></i>    
+                                <i className="bi bi-heart-fill"></i> : 
+                                <i className="bi bi-heart"></i>    
                         }
                         </button>   
                     </div>

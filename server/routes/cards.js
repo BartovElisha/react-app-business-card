@@ -8,7 +8,6 @@ router.get('/user/:id', cards.userCards);
 
 router.post('/', cards.addNew);
 router.patch('/:id', cards.updateDetails);
-// router.put('/:id', cards.updateDetails);
 router.delete('/:id', cards.deleteCard);
 
 module.exports = router;

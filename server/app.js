@@ -22,5 +22,6 @@ app.use(headers);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/cards', auth, cardsRouter);
+app.use('/allcards', cardsRouter);
 
 module.exports = app;

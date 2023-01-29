@@ -8,7 +8,7 @@ const handleRequest = (
     headers?: HeadersInit,
     data?: object,
     checkToken = true): Promise<Response> | null => {
-        
+
     if (checkToken && !verifyToken()) {
         return null;
     }
@@ -25,10 +25,13 @@ const handleRequest = (
     return fetch(url, config);
 }
 
-export const getRequest = (endpoint: string): Promise<Response> | null => {
+export const getRequest = (endpoint: string, checkToken = true): Promise<Response> | null => {
     return handleRequest(
         `${serverUrl}${endpoint}`,
-        'GET'
+        'GET',
+        undefined, // Skip parameter
+        undefined, // Skip parameter
+        checkToken
     );
 }
 

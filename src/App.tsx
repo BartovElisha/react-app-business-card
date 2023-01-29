@@ -183,9 +183,7 @@ function App() {
                     <Route 
                         path="/"
                         element={
-                            <RouteGuard>
-                                <Home />
-                            </RouteGuard>                            
+                            <Home />
                         }  
                     />
                     <Route
