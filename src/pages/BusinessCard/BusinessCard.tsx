@@ -73,7 +73,7 @@ function BusinessCard() {
                         sub={subTitle}                
                     />
                     <div className="container mb-5">
-                        <div className="card">
+                        <div className="card shadow p-1 mb-3 bg-body-tertiary rounded">
                             <img 
                             src={`${image}`}   
                             className="card-img-top rounded img-fluid img-thumbnail" alt={`Img ${title}`} />  
