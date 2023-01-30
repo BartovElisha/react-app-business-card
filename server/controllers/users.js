@@ -33,8 +33,7 @@ module.exports = {
                 email: user.email,
                 name: user.name,
                 isBiz: user.isBiz,
-                isAdmin: user.isAdmin,
-                favoriteCards_id: user.favoriteCards_id
+                isAdmin: user.isAdmin
             });
         }
         catch (err) {
@@ -81,8 +80,7 @@ module.exports = {
                 name: newUser.name,
                 email: newUser.email,
                 isBiz: newUser.isBiz,
-                isAdmin: newUser.isAdmin,
-                favoriteCards_id: user.favoriteCards_id
+                isAdmin: newUser.isAdmin
             })
         }
         catch (err) {
@@ -112,44 +110,7 @@ module.exports = {
                 name: user.name,
                 email: user.email,
                 isBiz: user.isBiz,
-                isAdmin: user.isAdmin,
-                favoriteCards_id: user.favoriteCards_id
-            });
-        }
-        catch (err) {
-            res.status(400).json({ error: "Invalid data" });
-            console.log(`Error: ${err}`);
-        }
-    },
-
-    // Function to update favotes cards list of user
-    updateFavoriteCardsList: async function (req, res, next) {
-        try {
-            const schema = joi.object({
-                id: joi.string().required(),
-            });
-            const { error, value } = schema.validate(req.params);
-            
-            if (error) {
-                console.log(error.details[0].message);
-                throw 'error get details';
-            }
-
-            const user = await User
-                .findByIdAndUpdate(
-                    value.id, 
-                    {favoriteCards_id: req.body.favoriteCards_id}, 
-                    {new: true});
-
-            if (!user) throw "Invalid user id, no such user.";
-
-            res.json({
-                id: user._id,
-                name: user.name,
-                email: user.email,
-                isBiz: user.isBiz,
-                isAdmin: user.isAdmin,
-                favoriteCards_id: user.favoriteCards_id
+                isAdmin: user.isAdmin
             });
         }
         catch (err) {

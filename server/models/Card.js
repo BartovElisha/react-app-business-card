@@ -60,6 +60,7 @@ const cardSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
     },
+    users_likes_id: [mongoose.SchemaTypes.ObjectId]
 });
 
 const Card = mongoose.model("card", cardSchema);
