@@ -12,6 +12,7 @@ interface Props {
     image: string;
     bizNumber: string;
     user_id: string;
+    handleAddLike: Function;
     handleDeleteCard: Function;
 }
 
@@ -24,6 +25,7 @@ function Card({
         image,
         bizNumber,
         user_id,
+        handleAddLike,
         handleDeleteCard
     }: Props) {
     
@@ -68,6 +70,7 @@ function Card({
     }
 
     function likeToggle() {
+        handleAddLike();
         setLike(!like);    
     }
 

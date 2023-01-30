@@ -29,6 +29,7 @@ interface Context {
     handleSignout: Function;
     signIn: Function;    
     handleCardsDisplayMode: Function;
+    updateBusinessCardLikesList: Function;
     delBusinessCard: Function;
     updateBusinessCards: Function;
     searchBusinessCard: Function;     
@@ -123,6 +124,10 @@ function App() {
         });
     }
 
+    function updateBusinessCardLikesList(businessCard: IBusinessCard) {
+        console.log(`User ${userName} added like to the card ${businessCard.title}`);    
+    }        
+
     function delBusinessCard(businessCard: IBusinessCard) {
         const res = deleteRequest(
             `cards/${businessCard._id}`            
@@ -155,8 +160,8 @@ function App() {
     function updateBusinessCards(cards: Array<IBusinessCard>) {
         setBusinessCards(cards);   
         setFilteredBusinessCards(cards);
-    }     
-
+    }   
+    
     function searchBusinessCard(cards: Array<IBusinessCard>) {
         setFilteredBusinessCards(cards);
     }
@@ -172,6 +177,7 @@ function App() {
             handleSignout,
             signIn,
             handleCardsDisplayMode,
+            updateBusinessCardLikesList,
             delBusinessCard,
             updateBusinessCards,
             searchBusinessCard                                      
