@@ -237,7 +237,9 @@ function App() {
                     <Route
                         path="/card/:id"
                         element={
-                            <BusinessCard />
+                            <RouteGuard>
+                                <BusinessCard />
+                            </RouteGuard>                            
                         } 
                     />           
                 </Routes>

@@ -29,7 +29,8 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
         required: true,
-    }
+    },
+    favoriteCards_id: [mongoose.SchemaTypes.ObjectId]
 });
 
 const User = mongoose.model('User', userSchema);
