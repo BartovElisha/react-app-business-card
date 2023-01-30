@@ -16,7 +16,7 @@ import Edit from './pages/Edit/Edit';
 import FavoriteCards from './pages/FavoriteCards/FavoriteCards';
 import Home from './pages/Home/Home';
 import MyCards from './pages/MyCards/MyCards';
-import { deleteRequest, postRequest } from './services/apiService';
+import { deleteRequest, getRequest, patchRequest, postRequest } from './services/apiService';
 import { IBusinessCard } from './types/types';
 
 interface Context {
@@ -125,7 +125,42 @@ function App() {
     }
 
     function updateBusinessCardLikesList(businessCard: IBusinessCard) {
-        console.log(`User ${userName} added like to the card ${businessCard.title}`);    
+        console.log(`User ${userName} added like to the card ${businessCard.title}`); 
+
+        // 1. Read business card data from database
+        const res = getRequest(`cards/${businessCard._id}`);
+        if (!res) {
+            return;
+        }
+
+        res
+        .then(res => res.json())
+        .then(json => {
+            if (json.ok === false) {
+                // setError('error get the data');
+                return;
+            }
+            let usersLikesArray = [...json.users_likes_id];
+            console.log(usersLikesArray);
+            // I'am here ...
+            // if need add like , need push user_is to array and send to database, 
+            // if need remove like, need find user id in array, remove it and send to database.
+        });
+
+        // 2. Update users likes list array
+
+        // 3. Update business card database
+        // const res = patchRequest(
+        //     `cards/${businessCard._id}`,
+        //     data
+        // );
+        // if (!res) {
+        //     return;
+        // }
+        
+        // res
+        // .then(response => response.json())
+        
     }        
 
     function delBusinessCard(businessCard: IBusinessCard) {
