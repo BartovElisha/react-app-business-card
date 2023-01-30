@@ -11,13 +11,10 @@ function Navbar() {
     }
 
     const isSignedIn = context && context.userName.length > 0;
-    // console.log(`isSignedIn status: ${isSignedIn}`);
-    // console.log(`User: ${context.userName}`);
-    // console.log(`User: ${context.user_id}`);
 
     return (  
         <header>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
                 <div className="container-fluid">
                     <NavLink 
                         className="navbar-brand" 
