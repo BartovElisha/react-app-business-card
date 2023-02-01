@@ -94,16 +94,35 @@ function Card({
                     <hr />
                     <div className="d-flex justify-content-evenly">
                         {
-                            <Link
-                                to={`/card/${_id}`}
-                                className="btn btn-default"
-                            >
-                            <i className="bi bi-ticket-detailed"></i>    
-                            </Link>                            
+                            signInUserId.length === 0 &&
+                            <div className="text-info">
+                                Signin for details...
+                            </div>   
+                        }
+                        {
+                            signInUserId.length > 0 &&
+                            <>
+                                <Link
+                                    to={`/card/${_id}`}
+                                    className="btn btn-default"
+                                >
+                                <i className="bi bi-ticket-detailed"></i>    
+                                </Link> 
+                                <button 
+                                    onClick={likeToggle}
+                                    className="btn btn-default"
+                                >
+                                {
+                                    like ? 
+                                        <i className="bi bi-heart-fill"></i> : 
+                                        <i className="bi bi-heart"></i>    
+                                }
+                                </button>  
+                            </>
                         }
                         {
                             isCurrentUser &&
-                            <>
+                            <>                     
                                 <Link 
                                     to={`/edit/${_id}`}
                                     className="btn btn-default"
@@ -118,16 +137,6 @@ function Card({
                                 </button>
                             </>
                         }
-                        <button 
-                            onClick={likeToggle}
-                            className="btn btn-default"
-                        >
-                        {
-                            like ? 
-                                <i className="bi bi-heart-fill"></i> : 
-                                <i className="bi bi-heart"></i>    
-                        }
-                        </button>   
                     </div>
                 </div>
             </div>
