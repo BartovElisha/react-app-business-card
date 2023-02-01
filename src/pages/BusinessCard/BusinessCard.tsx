@@ -87,7 +87,7 @@ function BusinessCard() {
                                 <hr />
                                 <div className="d-flex justify-content-evenly">
                                     {/* <Like 
-                                        card_id={id}
+                                        card_id={+id}
                                     /> */}
                                     {
                                         isCurrentUser &&
