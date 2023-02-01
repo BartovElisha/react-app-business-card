@@ -10,7 +10,6 @@ function BusinessCards() {
     }
 
     const filteredBusinessCards = context.filteredBusinessCards || [];
-    const updateBusinessCardLikesList = context.updateBusinessCardLikesList || function () {} ;
     const delBusinessCard = context.delBusinessCard || function () {} ;
 
     return (        
@@ -28,7 +27,6 @@ function BusinessCards() {
                         <Card 
                             key={card._id}
                             {...card}
-                            handleAddLike={() => updateBusinessCardLikesList(card)}
                             handleDeleteCard={() => delBusinessCard(card)}
                         />
                     )

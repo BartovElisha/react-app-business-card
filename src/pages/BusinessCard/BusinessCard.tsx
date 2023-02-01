@@ -86,6 +86,9 @@ function BusinessCard() {
                                 <p><strong>Created At: </strong>{createdAt}</p>
                                 <hr />
                                 <div className="d-flex justify-content-evenly">
+                                    {/* <Like 
+                                        card_id={id}
+                                    /> */}
                                     {
                                         isCurrentUser &&
                                         <>
@@ -97,12 +100,6 @@ function BusinessCard() {
                                             </Link>
                                         </>
                                     }
-                                    <button 
-                                        className="btn btn-default"
-                                    >
-                                    <i className="bi bi-heart"></i>
-                                    {/* <i className="bi-hand-thumbs-up-fill"></i> */}
-                                    </button> 
                                     <Link 
                                         to={`/`}
                                         className="btn btn-default"

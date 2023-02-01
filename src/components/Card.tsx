@@ -1,7 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { confirmAlert } from "react-confirm-alert";
 import { Link } from "react-router-dom";
 import { AppContext } from "../App";
+import Like from "./Like";
 
 interface Props {
     _id: number;
@@ -12,7 +13,6 @@ interface Props {
     image: string;
     bizNumber: string;
     user_id: string;
-    handleAddLike: Function;
     handleDeleteCard: Function;
 }
 
@@ -25,12 +25,10 @@ function Card({
         image,
         bizNumber,
         user_id,
-        handleAddLike,
         handleDeleteCard
     }: Props) {
     
     const context = useContext(AppContext);
-    const [like, setLike] = useState<boolean>(false);
 
     // Confirm Alert Options
     const options = {
@@ -69,11 +67,6 @@ function Card({
         isCurrentUser = true;
     }
 
-    function likeToggle() {
-        handleAddLike();
-        setLike(!like);    
-    }
-
     function confirmAndDeleteCard() {
         confirmAlert(options);    
     }
@@ -108,16 +101,9 @@ function Card({
                                 >
                                 <i className="bi bi-ticket-detailed"></i>    
                                 </Link> 
-                                <button 
-                                    onClick={likeToggle}
-                                    className="btn btn-default"
-                                >
-                                {
-                                    like ? 
-                                        <i className="bi bi-heart-fill"></i> : 
-                                        <i className="bi bi-heart"></i>    
-                                }
-                                </button>  
+                                <Like
+                                    card_id={_id}
+                                />
                             </>
                         }
                         {
