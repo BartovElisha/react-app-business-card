@@ -37,6 +37,8 @@ function Like({ card_id }: Props) {
     }        
 
     function updateLikesList() {
+        // Hereeeeeeeeeeeeeeee
+
         console.log(usersLikesList);
     }
 

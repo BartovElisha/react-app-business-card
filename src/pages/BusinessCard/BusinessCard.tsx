@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AppContext } from "../../App";
+import Like from "../../components/Like";
 import Title from "../../components/Title";
 import { getRequest } from "../../services/apiService";
 
@@ -86,9 +87,13 @@ function BusinessCard() {
                                 <p><strong>Created At: </strong>{createdAt}</p>
                                 <hr />
                                 <div className="d-flex justify-content-evenly">
-                                    {/* <Like 
-                                        card_id={+id}
-                                    /> */}
+                                    {
+                                        id && 
+                                        <Like 
+                                            card_id={+id}
+                                        />
+                                    }
+
                                     {
                                         isCurrentUser &&
                                         <>
