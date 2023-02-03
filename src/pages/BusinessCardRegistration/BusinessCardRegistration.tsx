@@ -64,7 +64,6 @@ function BusinessCardRegistration() {
     }
 
     function createCard(data: IBusinessCardData) {
-        console.log(data)
         const res = postRequest(
             'cards',
             data,

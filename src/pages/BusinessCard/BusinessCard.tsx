@@ -93,7 +93,6 @@ function BusinessCard() {
                                             card_id={+id}
                                         />
                                     }
-
                                     {
                                         isCurrentUser &&
                                         <>
