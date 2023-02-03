@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { AppContext } from "../App";
 import { getRequest, patchRequest } from "../services/apiService";
 
@@ -15,6 +16,7 @@ function Like({ card_id }: Props) {
     // if (!context) {
     //     return <div>Error</div>
     // }
+    const userName = context?.userName;
     const signedInUserId = context?.user_id;
 
     function getUsersLikesList() {
@@ -32,6 +34,16 @@ function Like({ card_id }: Props) {
                 return;
             }
             setUsersLikesList(json.users_likes_id);
+            if (!signedInUserId) {
+                return;
+            }
+            console.log(json.users_likes_id)
+            if (json.users_likes_id.includes(signedInUserId)) {
+                setLikeStatus(true);    
+            }
+            else {
+                setLikeStatus(false);
+            }
         })
     }       
     
@@ -67,7 +79,17 @@ function Like({ card_id }: Props) {
             })
             patchUsersLikesList(result);
             setUsersLikesList(result); 
-            setLikeStatus(false);    
+            setLikeStatus(false);  
+            toast.info(`See you ${userName}...`, {
+                position: "bottom-center",
+                autoClose: 1000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });                
         }
         else {
             const result = [...usersLikesList];
@@ -75,6 +97,16 @@ function Like({ card_id }: Props) {
             patchUsersLikesList(result);
             setUsersLikesList(result);
             setLikeStatus(true);
+            toast.success(`Thank you ${userName}`, {
+                position: "bottom-center",
+                autoClose: 1000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });             
         }  
     }
 
@@ -84,7 +116,7 @@ function Like({ card_id }: Props) {
     }
     
     useEffect(() => {
-        getUsersLikesList();        
+        getUsersLikesList(); 
     },[]);
 
     return (
