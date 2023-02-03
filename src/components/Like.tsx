@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../App";
 import { getRequest, patchRequest } from "../services/apiService";
 
@@ -10,12 +10,12 @@ function Like({ card_id }: Props) {
     const context = useContext(AppContext);
     // States
     const [likeStatus, setLikeStatus] = useState<boolean>();
-    const [usersLikesList, setUsersLikesList] = useState<string[]>([""]); 
+    const [usersLikesList, setUsersLikesList] = useState<string[]>([]); 
 
-    if (!context) {
-        return <div>Error</div>
-    }
-    const signedInUserId = context.user_id;
+    // if (!context) {
+    //     return <div>Error</div>
+    // }
+    const signedInUserId = context?.user_id;
 
     function getUsersLikesList() {
         // Read business card data from database
@@ -57,6 +57,9 @@ function Like({ card_id }: Props) {
     }    
 
     function updateLikesList() {
+        if(!signedInUserId)
+            return;
+
         if (usersLikesList.includes(signedInUserId)) {
             let result = [...usersLikesList];
             result = result.filter(function (user_id) {
@@ -78,7 +81,11 @@ function Like({ card_id }: Props) {
     function likeToggle() {
         getUsersLikesList();
         updateLikesList();
-    }  
+    }
+    
+    useEffect(() => {
+        getUsersLikesList();        
+    },[]);
 
     return (
         <>
