@@ -91,7 +91,7 @@ function Like({ card_id }: Props) {
                     <i className="bi bi-heart-fill"></i> : 
                     <i className="bi bi-heart"></i>    
             }
-            </button>              
+            </button> 
         </>
     );
 }
