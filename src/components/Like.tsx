@@ -90,7 +90,7 @@ function Like({ card_id }: Props) {
             patchUsersLikesList(result);
             setUsersLikesList(result);
             setLikeStatus(true);
-            toast.success(`Thank you ${userName}`, {
+            toast.success(`Thank you for like ${userName}`, {
                 position: "bottom-center",
                 autoClose: 1000,
                 hideProgressBar: true,
