@@ -101,7 +101,7 @@ function BusinessCard() {
                                                 to={`/edit/${id}`}
                                                 className="btn btn-default"
                                             >
-                                            <i className="bi bi-pen"></i>
+                                            <i className="bi bi-pen text-info"></i>
                                             </Link>
                                         </>
                                     }

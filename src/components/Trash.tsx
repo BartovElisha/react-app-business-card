@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AppContext } from "../App";
 import { deleteRequest } from "../services/apiService";
-
 interface Props {
     card_id: string;
 }
@@ -79,8 +78,9 @@ function Trash({ card_id }: Props) {
 
     return (
         <button 
+        id="del-element"
             onClick={confirmAndDeleteCard}
-            className="btn btn-default"
+            className="btn btn-default text-danger"
         >
         <i className="bi bi-trash"></i>
         </button> 
