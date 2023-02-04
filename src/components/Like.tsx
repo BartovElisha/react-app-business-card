@@ -4,10 +4,11 @@ import { AppContext } from "../App";
 import { getRequest, patchRequest } from "../services/apiService";
 
 interface Props {
-    card_id: number;
+    card_id: string;
 }
 
 function Like({ card_id }: Props) {
+    console.log(card_id);
     const context = useContext(AppContext);
     // States
     const [likeStatus, setLikeStatus] = useState<boolean>();

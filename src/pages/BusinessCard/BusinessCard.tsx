@@ -90,7 +90,7 @@ function BusinessCard() {
                                     {
                                         id && 
                                         <Like 
-                                            card_id={+id}
+                                            card_id={id}
                                         />
                                     }
                                     {

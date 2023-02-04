@@ -5,7 +5,7 @@ import { AppContext } from "../App";
 import Like from "./Like";
 
 interface Props {
-    _id: number;
+    _id: string;
     title: string;
     subTitle: string;
     address: string;

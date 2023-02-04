@@ -10,7 +10,7 @@ export interface IError {
 }
 
 export interface IBusinessCard {
-    _id: number;
+    _id: string;
     title: string;
     subTitle: string;
     description: string;
