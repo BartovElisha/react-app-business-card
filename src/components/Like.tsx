@@ -8,7 +8,6 @@ interface Props {
 }
 
 function Like({ card_id }: Props) {
-    console.log(card_id);
     const context = useContext(AppContext);
     // States
     const [likeStatus, setLikeStatus] = useState<boolean>();

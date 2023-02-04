@@ -13,14 +13,13 @@ function FavoriteCards() {
     const updateBusinessCards = context?.updateBusinessCards || function() {}; 
     
     function filterFavoriteCards(card: IBusinessCard) {
-        // console.log(card);
         if (!signedInUserId) {
             return;
         }
-
         if(card.users_likes_id.includes(signedInUserId)) {
             return true;
         }
+        return false;
     }
 
     function handleFilterFavirite(cards: Array<IBusinessCard>) {
