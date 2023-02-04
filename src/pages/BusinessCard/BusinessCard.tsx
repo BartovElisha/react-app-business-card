@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { AppContext } from "../../App";
 import Like from "../../components/Like";
 import Title from "../../components/Title";
+import Trash from "../../components/Trash";
 import { getRequest } from "../../services/apiService";
 
 function BusinessCard() {
@@ -103,6 +104,12 @@ function BusinessCard() {
                                             <i className="bi bi-pen"></i>
                                             </Link>
                                         </>
+                                    }
+                                    {
+                                        id &&
+                                        <Trash 
+                                            card_id={id}
+                                        />
                                     }
                                     <Link 
                                         to={`/`}

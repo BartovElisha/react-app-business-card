@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { confirmAlert } from "react-confirm-alert";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AppContext } from "../App";
 import { deleteRequest } from "../services/apiService";
@@ -9,6 +10,7 @@ interface Props {
 }
 
 function Trash({ card_id }: Props) {
+    const navigate = useNavigate();
     const context = useContext(AppContext);
 
     if (!context) {
@@ -71,6 +73,7 @@ function Trash({ card_id }: Props) {
                 theme: "colored",
             }); 
             updateBusinessCards(updated);
+            navigate('/');
         });        
     }
 
