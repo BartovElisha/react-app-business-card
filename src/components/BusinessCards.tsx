@@ -8,9 +8,7 @@ function BusinessCards() {
     if (!context) {
         return <div>Error</div>;
     }
-
     const filteredBusinessCards = context.filteredBusinessCards || [];
-    const delBusinessCard = context.delBusinessCard || function () {} ;
 
     return (        
         <div className="container mb-5">
@@ -27,7 +25,6 @@ function BusinessCards() {
                         <Card 
                             key={card._id}
                             {...card}
-                            handleDeleteCard={() => delBusinessCard(card)}
                         />
                     )
                 }

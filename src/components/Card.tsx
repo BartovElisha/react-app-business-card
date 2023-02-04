@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { confirmAlert } from "react-confirm-alert";
 import { Link } from "react-router-dom";
 import { AppContext } from "../App";
 import Like from "./Like";
+import Trash from "./Trash";
 
 interface Props {
     _id: string;
@@ -13,7 +13,6 @@ interface Props {
     image: string;
     bizNumber: string;
     user_id: string;
-    handleDeleteCard: Function;
 }
 
 function Card({
@@ -25,50 +24,19 @@ function Card({
         image,
         bizNumber,
         user_id,
-        handleDeleteCard
     }: Props) {
     
     const context = useContext(AppContext);
 
-    // Confirm Alert Options
-    const options = {
-        title: 'Please Confirm',
-        message: 'Are you sure you want to delete this card ?',
-        buttons: [
-            {
-                label: 'Yes',
-                onClick: () => handleDeleteCard()
-            },
-            {
-                label: 'Cancel',
-                // onClick: () => alert('Click No')
-            }
-        ],
-        closeOnEscape: true,
-        closeOnClickOutside: true,
-        keyCodeForClose: [8, 32],
-        willUnmount: () => {},
-        afterClose: () => {},
-        onClickOutside: () => {},
-        onKeypress: () => {},
-        onKeypressEscape: () => {},
-        overlayClassName: "overlay-custom-class-name"
-    };
-
     if (!context) {
         return <div>Error</div>;
-    }  
-    
+    }      
     const signInUserId = context.user_id;
    
     // Check if this card created by signedin user.
     let isCurrentUser: boolean = false;
     if (user_id === signInUserId) {
         isCurrentUser = true;
-    }
-
-    function confirmAndDeleteCard() {
-        confirmAlert(options);    
     }
 
     return (  
@@ -115,12 +83,9 @@ function Card({
                                 >
                                 <i className="bi bi-pen"></i>
                                 </Link>
-                                <button 
-                                    onClick={confirmAndDeleteCard}
-                                    className="btn btn-default"
-                                >
-                                <i className="bi bi-trash"></i>
-                                </button>
+                                <Trash 
+                                    card_id={_id}
+                                />
                             </>
                         }
                     </div>

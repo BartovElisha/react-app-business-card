@@ -16,7 +16,7 @@ import Edit from './pages/Edit/Edit';
 import FavoriteCards from './pages/FavoriteCards/FavoriteCards';
 import Home from './pages/Home/Home';
 import MyCards from './pages/MyCards/MyCards';
-import { deleteRequest, postRequest } from './services/apiService';
+import { postRequest } from './services/apiService';
 import { IBusinessCard } from './types/types';
 
 interface Context {
@@ -29,7 +29,6 @@ interface Context {
     handleSignout: Function;
     signIn: Function;    
     handleCardsDisplayMode: Function;
-    delBusinessCard: Function;
     updateBusinessCards: Function;
     searchBusinessCard: Function;     
 }
@@ -123,35 +122,6 @@ function App() {
         });
     }
 
-    function delBusinessCard(businessCard: IBusinessCard) {
-        const res = deleteRequest(
-            `cards/${businessCard._id}`            
-        );
-        if (!res) {
-            return;
-        }
-
-        res
-        .then(response => response.json())
-        .then(json => {
-            const updated = [...businessCards].filter(
-                businessCardItem => businessCardItem._id !== businessCard._id
-            );
-            toast.info(`Business Card ${json.title} was deleted`,{
-                position: "top-center",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: false,
-                progress: undefined,
-                theme: "colored",
-            }); 
-            setBusinessCards(updated);
-            setFilteredBusinessCards(updated);
-        });        
-    }
-
     function updateBusinessCards(cards: Array<IBusinessCard>) {
         setBusinessCards(cards);   
         setFilteredBusinessCards(cards);
@@ -172,7 +142,6 @@ function App() {
             handleSignout,
             signIn,
             handleCardsDisplayMode,
-            delBusinessCard,
             updateBusinessCards,
             searchBusinessCard                                      
         }}>
