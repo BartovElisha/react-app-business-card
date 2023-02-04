@@ -19,5 +19,6 @@ export interface IBusinessCard {
     image: string;
     bizNumber: string;
     user_id: string;
+    users_likes_id: [string];
     createdAt: Date;
 }

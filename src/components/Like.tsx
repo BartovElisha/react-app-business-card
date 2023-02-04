@@ -13,9 +13,6 @@ function Like({ card_id }: Props) {
     const [likeStatus, setLikeStatus] = useState<boolean>();
     const [usersLikesList, setUsersLikesList] = useState<string[]>([]); 
 
-    // if (!context) {
-    //     return <div>Error</div>
-    // }
     const userName = context?.userName;
     const signedInUserId = context?.user_id;
 
@@ -34,11 +31,7 @@ function Like({ card_id }: Props) {
                 return;
             }
             setUsersLikesList(json.users_likes_id);
-            if (!signedInUserId) {
-                return;
-            }
-            console.log(json.users_likes_id)
-            if (json.users_likes_id.includes(signedInUserId)) {
+            if (signedInUserId && json.users_likes_id.includes(signedInUserId)) {
                 setLikeStatus(true);    
             }
             else {
