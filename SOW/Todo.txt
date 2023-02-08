@@ -13,3 +13,4 @@
 5. Add Search function. -> Done
 6. Add About card element. -> Done
 7. Add Error <div> message if no cards found. -> Done
+8. add badge to my cards and favorit.

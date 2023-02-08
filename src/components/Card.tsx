@@ -81,7 +81,7 @@ function Card({
                                     to={`/edit/${_id}`}
                                     className="btn btn-default"
                                 >
-                                <i className="bi bi-pen text-info"></i>
+                                <i className="bi bi-pen"></i>
                                 </Link>
                                 <Trash 
                                     card_id={_id}

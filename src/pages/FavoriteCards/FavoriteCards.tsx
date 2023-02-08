@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AppContext } from "../../App";
 import BusinessCards from "../../components/BusinessCards";
@@ -11,6 +12,8 @@ function FavoriteCards() {
     const context = useContext(AppContext);
     const signedInUserId = context?.user_id; 
     const updateBusinessCards = context?.updateBusinessCards || function() {}; 
+
+    const navigate = useNavigate();
     
     function filterFavoriteCards(card: IBusinessCard) {
         if (!signedInUserId) {
@@ -56,7 +59,13 @@ function FavoriteCards() {
     }
 
     // Hook useEffect, Run getBusinessCards function only ones time then page loades.
-    useEffect(getBusinessCards,[]);
+    useEffect(() => {
+        if (!context?.user_id) {
+            navigate('/signin');
+            return;
+        }
+        getBusinessCards();
+    },[]);    
 
     return (  
         <>

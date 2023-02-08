@@ -120,8 +120,8 @@ function Like({ card_id }: Props) {
             >
             {
                 likeStatus ? 
-                    <i className="bi bi-heart-fill text-danger"></i> : 
-                    <i className="bi bi-heart text-danger"></i>    
+                    <i className="bi bi-heart-fill"></i> : 
+                    <i className="bi bi-heart"></i>    
             }
             </button> 
         </>

@@ -80,7 +80,7 @@ function Trash({ card_id }: Props) {
         <button 
         id="del-element"
             onClick={confirmAndDeleteCard}
-            className="btn btn-default text-danger"
+            className="btn btn-default"
         >
         <i className="bi bi-trash"></i>
         </button> 
