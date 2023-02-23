@@ -46,7 +46,7 @@ function MenuBar() {
         <div className="d-flex p-4">
             <div className="d-flex align-items-center mx-auto w-50">
                 <button
-                    onClick={(e) => context.handleCardsDisplayMode('col-12 col-md-6 col-lg-4')}
+                    onClick={(e) => context.handleCardsDisplayMode('col-12 col-md-6 col-lg-4 d-flex')}
                     className="btn btn-default"
                 >
                     <i className="bi-grid-3x3-gap"></i>

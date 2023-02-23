@@ -46,7 +46,7 @@ function App() {
     const [userName, setUserName] = useState<string>('');
     const [user_id, setUser_id] = useState<string>('');
     const [isAdmin,setIsAdmin] = useState<boolean>(false);
-    const [cardsDisplayMode, setCardsDisplayMode] = useState<string>('col-12 col-md-6 col-lg-4');
+    const [cardsDisplayMode, setCardsDisplayMode] = useState<string>('col-12 col-md-6 col-lg-4 d-flex');
     const [businessCards, setBusinessCards] = useState<Array<IBusinessCard>>([]);
     const [filteredBusinessCards, setFilteredBusinessCards] = 
         useState<Array<IBusinessCard>>([...businessCards]);
